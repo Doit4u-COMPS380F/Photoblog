@@ -14,7 +14,7 @@
 | -| - |
 | Photo Upload | Kevin Li  |
 | Comment Section  |  |
-| User Management (Login/Logout/Register) | Kevin Li
+| User Management (Login/Logout/Register) |
 | Database |  |
 
 ## 3. How to Use
