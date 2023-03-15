@@ -1,5 +1,5 @@
 # Photoblog by Doit4u
-#### Purpose: A small website taht allows photo uploading and comment writing, which is easy to use by normal users. 
+#### Purpose: A small website that allows photo uploading and comment writing, which is easy to use by normal users. 
 #### Due Date: 10 APR 2023
 
 ## 1. Structure
