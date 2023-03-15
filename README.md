@@ -10,7 +10,7 @@
 
 ## 2. Task Distribution
 #### *** One single task can be shared by multiple team mates
-| Tasks | Person/People |
+| Tasks | Person / People |
 | -| - |
 | Photo Upload | Kevin Li  |
 | Comment Section  |  |
@@ -24,6 +24,6 @@
 | Index | localhost:8080/Doit4u/Photoblog/index |
 
 ## 4. Logbook
-| Event/Issue | Date |
+| Event / Issue | Date |
 | - | - |
 | Project Repository Initialized | 15 Mar 2023 |
