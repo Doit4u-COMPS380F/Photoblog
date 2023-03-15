@@ -17,12 +17,12 @@
 | User Management (Login/Logout/Register) | Kevin Li
 | Database |  |
 
-## 3. Logbook
-| Event/Issue | Date |
-| - | - |
-| Project Repository Initialized | 15 Mar 2023 |
-
-## 4. How to Use
+## 3. How to Use
 | Page | Link |
 | - | - |
 | Index | localhost:8080/Doit4u/Photoblog/index |
+
+## 4. Logbook
+| Event/Issue | Date |
+| - | - |
+| Project Repository Initialized | 15 Mar 2023 |
