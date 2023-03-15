@@ -18,7 +18,7 @@
 | Database |  |
 
 ## 3. How to Use
-#### *** Launch this project in IntelliJ IDEA.
+#### *** Launch this project in IntelliJ IDEA and open in you browser
 | Page | Link |
 | - | - |
 | Index | localhost:8080/Doit4u/Photoblog/index |
