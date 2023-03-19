@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/Photoblog")
-public class pageController {
+public class PageController {
 
     @GetMapping(value = {"", "/index"})
     public String list(ModelMap model) {

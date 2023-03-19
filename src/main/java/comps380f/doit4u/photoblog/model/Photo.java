@@ -3,12 +3,12 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-public class photo {
+public class Photo {
     private long id;
     private String customerName;
     private String subject;
     private String body;
-    private Map<String, user> user = new ConcurrentHashMap<>();
+    private Map<String, User> user = new ConcurrentHashMap<>();
 
     // Getters and Setters of id, customerName, subject, body (not attachments)
     public long getId() {
@@ -43,15 +43,15 @@ public class photo {
         this.body = body;
     }
 
-    public user getAttachment(String name) {
+    public User getAttachment(String name) {
         return this.user.get(name);
     }
 
-    public Collection<user> getAttachments() {
+    public Collection<User> getAttachments() {
         return this.user.values();
     }
 
-    public void addAttachment(user users) {
+    public void addAttachment(User users) {
         this.user.put(users.getId(), users);
     }
 
