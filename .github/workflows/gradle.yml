@@ -20,9 +20,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Liberica Java 17
-        uses: bell-sw/liberica@1.5.2
+        uses: bell-sw/Liberica@17.0.4.1+1
         with:
           java-version: '17'
       - name: Build with Gradle
