@@ -20,7 +20,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@latest
+      - uses: actions/checkout@main
       - name: Set up Liberica Java 17
         uses: bell-sw/Liberica@17.0.5+8
         with:
