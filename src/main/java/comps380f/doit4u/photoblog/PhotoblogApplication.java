@@ -15,6 +15,10 @@ import java.util.Collections;
 @SpringBootApplication
 public class PhotoblogApplication {
 
+    public static void main(String[] args) {
+        SpringApplication.run(PhotoblogApplication.class, args);
+    }
+
     @Bean
     public ConfigurableServletWebServerFactory configurableServletWebServerFactory() {
         return new TomcatServletWebServerFactory() {
@@ -29,18 +33,13 @@ public class PhotoblogApplication {
                 jspPropertyGroup.addIncludePrelude("/WEB-INF/jsp/base.jspf");
                 jspPropertyGroup.setTrimWhitespace("true");
                 jspPropertyGroup.setDefaultContentType("text/html");
-                JspPropertyGroupDescriptorImpl jspPropertyGroupDescriptor = new JspPropertyGroupDescriptorImpl(jspPropertyGroup);
+                JspPropertyGroupDescriptorImpl jspPropertyGroupDescriptor
+                        = new JspPropertyGroupDescriptorImpl(jspPropertyGroup);
                 context.setJspConfigDescriptor(
                         new JspConfigDescriptorImpl(
-                                Collections.singletonList(jspPropertyGroupDescriptor), Collections.emptyList()
-                        )
-                );
+                                Collections.singletonList(jspPropertyGroupDescriptor),
+                                Collections.emptyList()));
             }
         };
     }
-
-    public static void main(String[] args) {
-        SpringApplication.run(PhotoblogApplication.class, args);
-    }
-
 }
