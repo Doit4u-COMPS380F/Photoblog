@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Ticket {
+public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -17,7 +17,7 @@ public class Ticket {
     private String subject;
     private String body;
 
-    @OneToMany(mappedBy = "ticket", fetch = FetchType.EAGER,
+    @OneToMany(mappedBy = "photo", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     private List<Attachment> attachments = new ArrayList<>();
@@ -64,7 +64,7 @@ public class Ticket {
     }
 
     public void deleteAttachment(Attachment attachment) {
-        attachment.setTicket(null);
+        attachment.setPhoto(null);
         this.attachments.remove(attachment);
     }
 }

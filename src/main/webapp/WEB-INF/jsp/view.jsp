@@ -4,19 +4,19 @@
     <title>Customer Support</title>
 </head>
 <body>
-<h2>Ticket #${ticketId}: <c:out value="${ticket.subject}"/></h2>
-[<a href="<c:url value="/ticket/delete/${ticket.id}" />">Delete</a>]<br/><br/>
-<i>Customer Name - <c:out value="${ticket.customerName}"/></i><br/><br/>
-<c:out value="${ticket.body}"/><br/><br/>
-<c:if test="${!empty ticket.attachments}">
+<h2>Photo #${photoId}: <c:out value="${photo.subject}"/></h2>
+[<a href="<c:url value="/delete/${photo.id}" />">Delete</a>]<br/><br/>
+<i>Customer Name - <c:out value="${photo.customerName}"/></i><br/><br/>
+<c:out value="${photo.body}"/><br/><br/>
+<c:if test="${!empty photo.attachments}">
     Attachments:
-    <c:forEach items="${ticket.attachments}" var="attachment" varStatus="status">
+    <c:forEach items="${photo.attachments}" var="attachment" varStatus="status">
         <c:if test="${!status.first}">, </c:if>
-        <a href="<c:url value="/ticket/${ticketId}/attachment/${attachment.id}" />">
+        <a href="<c:url value="/${photoId}/attachment/${attachment.id}" />">
             <c:out value="${attachment.name}"/></a>
-        [<a href="<c:url value="/ticket/${ticketId}/delete/${attachment.id}" />">Delete</a>]
+        [<a href="<c:url value="/${photoId}/delete/${attachment.id}" />">Delete</a>]
     </c:forEach><br/><br/>
 </c:if>
-<a href="<c:url value="/ticket" />">Return to list tickets</a>
+<a href="<c:url value="" />">Return to list photos</a>
 </body>
 </html>

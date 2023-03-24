@@ -4,8 +4,8 @@
     <title>Customer Support</title>
 </head>
 <body>
-<h2>Create a Ticket</h2>
-<form:form method="POST" enctype="multipart/form-data" modelAttribute="ticketForm">
+<h2>Create a Photo</h2>
+<form:form method="POST" enctype="multipart/form-data" modelAttribute="photoForm">
     <form:label path="customerName">Customer Name</form:label><br/>
     <form:input type="text" path="customerName"/><br/><br/>
     <form:label path="subject">Subject</form:label><br/>

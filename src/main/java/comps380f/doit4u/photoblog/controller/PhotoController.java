@@ -1,10 +1,10 @@
 package comps380f.doit4u.photoblog.controller;
 
-import comps380f.doit4u.photoblog.dao.TicketService;
+import comps380f.doit4u.photoblog.dao.PhotoService;
 import comps380f.doit4u.photoblog.exception.AttachmentNotFound;
-import comps380f.doit4u.photoblog.exception.TicketNotFound;
+import comps380f.doit4u.photoblog.exception.PhotoNotFound;
 import comps380f.doit4u.photoblog.model.Attachment;
-import comps380f.doit4u.photoblog.model.Ticket;
+import comps380f.doit4u.photoblog.model.Photo;
 import comps380f.doit4u.photoblog.view.DownloadingView;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Controller;
@@ -20,22 +20,22 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/ticket")
-public class TicketController {
+@RequestMapping("")
+public class PhotoController {
 
     @Resource
-    private TicketService tService;
+    private PhotoService tService;
 
     // Controller methods, Form-backing object, ...
-    @GetMapping(value = {"", "/list"})
+    @GetMapping(value = {"", "/index"})
     public String list(ModelMap model) {
-        model.addAttribute("ticketDatabase", tService.getTickets());
-        return "list";
+        model.addAttribute("photoDatabase", tService.getPhotos());
+        return "index";
     }
 
     @GetMapping("/create")
     public ModelAndView create() {
-        return new ModelAndView("add", "ticketForm", new Form());
+        return new ModelAndView("add", "photoForm", new Form());
     }
 
     public static class Form {
@@ -80,46 +80,46 @@ public class TicketController {
 
     @PostMapping("/create")
     public View create(Form form) throws IOException {
-        long ticketId = tService.createTicket(form.getCustomerName(),
+        long photoId = tService.createPhoto(form.getCustomerName(),
                 form.getSubject(), form.getBody(), form.getAttachments());
-        return new RedirectView("/ticket/view/" + ticketId, true);
+        return new RedirectView("/view/" + photoId, true);
     }
 
-    @GetMapping("/view/{ticketId}")
-    public String view(@PathVariable("ticketId") long ticketId,
+    @GetMapping("/view/{photoId}")
+    public String view(@PathVariable("photoId") long photoId,
                        ModelMap model)
-            throws TicketNotFound {
-        Ticket ticket = tService.getTicket(ticketId);
-        model.addAttribute("ticketId", ticketId);
-        model.addAttribute("ticket", ticket);
+            throws PhotoNotFound {
+        Photo photo = tService.getPhoto(photoId);
+        model.addAttribute("photoId", photoId);
+        model.addAttribute("photo", photo);
         return "view";
     }
 
-    @GetMapping("/{ticketId}/attachment/{attachment:.+}")
-    public View download(@PathVariable("ticketId") long ticketId,
+    @GetMapping("/{photoId}/attachment/{attachment:.+}")
+    public View download(@PathVariable("photoId") long photoId,
                          @PathVariable("attachment") UUID attachmentId)
-            throws TicketNotFound, AttachmentNotFound {
-        Attachment attachment = tService.getAttachment(ticketId, attachmentId);
+            throws PhotoNotFound, AttachmentNotFound {
+        Attachment attachment = tService.getAttachment(photoId, attachmentId);
         return new DownloadingView(attachment.getName(),
                     attachment.getMimeContentType(), attachment.getContents());
     }
 
-    @GetMapping("/delete/{ticketId}")
-    public String deleteTicket(@PathVariable("ticketId") long ticketId)
-            throws TicketNotFound {
-        tService.delete(ticketId);
-        return "redirect:/ticket/list";
+    @GetMapping("/delete/{photoId}")
+    public String deletePhoto(@PathVariable("photoId") long photoId)
+            throws PhotoNotFound {
+        tService.delete(photoId);
+        return "redirect:/index";
     }
 
-    @GetMapping("/{ticketId}/delete/{attachment:.+}")
-    public String deleteAttachment(@PathVariable("ticketId") long ticketId,
+    @GetMapping("/{photoId}/delete/{attachment:.+}")
+    public String deleteAttachment(@PathVariable("photoId") long photoId,
                                    @PathVariable("attachment") UUID attachmentId)
-            throws TicketNotFound, AttachmentNotFound {
-        tService.deleteAttachment(ticketId, attachmentId);
-        return "redirect:/ticket/view/" + ticketId;
+            throws PhotoNotFound, AttachmentNotFound {
+        tService.deleteAttachment(photoId, attachmentId);
+        return "redirect:/view/" + photoId;
     }
 
-    @ExceptionHandler({TicketNotFound.class, AttachmentNotFound.class})
+    @ExceptionHandler({PhotoNotFound.class, AttachmentNotFound.class})
     public ModelAndView error(Exception e) {
         return new ModelAndView("error", "message", e.getMessage());
     }
