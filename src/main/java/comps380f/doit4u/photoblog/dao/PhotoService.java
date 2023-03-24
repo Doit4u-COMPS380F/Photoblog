@@ -16,20 +16,20 @@ import java.util.UUID;
 @Service
 public class PhotoService {
     @Resource
-    private PhotoRepository tRepo;
+    private PhotoRepository pRepo;
 
     @Resource
     private AttachmentRepository aRepo;
 
     @Transactional
     public List<Photo> getPhotos() {
-        return tRepo.findAll();
+        return pRepo.findAll();
     }
 
     @Transactional
     public Photo getPhoto(long id)
             throws PhotoNotFound {
-        Photo photo = tRepo.findById(id).orElse(null);
+        Photo photo = pRepo.findById(id).orElse(null);
         if (photo == null) {
             throw new PhotoNotFound(id);
         }
@@ -39,7 +39,7 @@ public class PhotoService {
     @Transactional
     public Attachment getAttachment(long photoId, UUID attachmentId)
             throws PhotoNotFound, AttachmentNotFound {
-        Photo photo = tRepo.findById(photoId).orElse(null);
+        Photo photo = pRepo.findById(photoId).orElse(null);
         if (photo == null) {
             throw new PhotoNotFound(photoId);
         }
@@ -52,24 +52,24 @@ public class PhotoService {
 
     @Transactional(rollbackFor = PhotoNotFound.class)
     public void delete(long id) throws PhotoNotFound {
-        Photo deletedPhoto = tRepo.findById(id).orElse(null);
+        Photo deletedPhoto = pRepo.findById(id).orElse(null);
         if (deletedPhoto == null) {
             throw new PhotoNotFound(id);
         }
-        tRepo.delete(deletedPhoto);
+        pRepo.delete(deletedPhoto);
     }
 
     @Transactional(rollbackFor = AttachmentNotFound.class)
     public void deleteAttachment(long photoId, UUID attachmentId)
             throws PhotoNotFound, AttachmentNotFound {
-        Photo photo = tRepo.findById(photoId).orElse(null);
+        Photo photo = pRepo.findById(photoId).orElse(null);
         if (photo == null) {
             throw new PhotoNotFound(photoId);
         }
         for (Attachment attachment : photo.getAttachments()) {
             if (attachment.getId().equals(attachmentId)) {
                 photo.deleteAttachment(attachment);
-                tRepo.save(photo);
+                pRepo.save(photo);
                 return;
             }
         }
@@ -97,7 +97,7 @@ public class PhotoService {
                 photo.getAttachments().add(attachment);
             }
         }
-        Photo savedPhoto = tRepo.save(photo);
+        Photo savedPhoto = pRepo.save(photo);
         return savedPhoto.getId();
     }
 }

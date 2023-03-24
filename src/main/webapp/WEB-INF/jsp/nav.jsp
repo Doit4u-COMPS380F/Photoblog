@@ -8,7 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="Doit4u/Photoblog/">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/Doit4u/Photoblog/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Doit4u/Photoblog/create">Upload a Photo</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Features</a>

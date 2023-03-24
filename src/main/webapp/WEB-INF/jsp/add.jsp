@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+<html data-bs-theme="dark">
 <html>
 <head>
-    <title>Customer Support</title>
+    <title>Photoblog - Upload</title>
+    <%@include file="header.jsp" %>
 </head>
 <body>
-<h2>Create a Photo</h2>
+<%@include file="nav.jsp" %>
+<div class="container mt-5">
+<h2>Upload a Photo</h2>
 <form:form method="POST" enctype="multipart/form-data" modelAttribute="photoForm">
     <form:label path="customerName">Customer Name</form:label><br/>
     <form:input type="text" path="customerName"/><br/><br/>

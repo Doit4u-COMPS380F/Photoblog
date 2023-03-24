@@ -7,8 +7,7 @@
 <body>
 <%@include file="nav.jsp" %>
 <div class="container mt-5">
-    <h1>Photoblog</h1>
-    <a href="<c:url value="/create" />">Create a Photo</a><br/><br/>
+<%--    <h1>Photoblog</h1>--%>
     <c:choose>
     <c:when test="${fn:length(photoDatabase) == 0}">
     <i>There are no photos in the system.</i>
