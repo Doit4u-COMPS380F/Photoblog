@@ -24,12 +24,12 @@ import java.util.UUID;
 public class PhotoController {
 
     @Resource
-    private PhotoService tService;
+    private PhotoService pService;
 
     // Controller methods, Form-backing object, ...
     @GetMapping(value = {"", "/index"})
     public String list(ModelMap model) {
-        model.addAttribute("photoDatabase", tService.getPhotos());
+        model.addAttribute("photoDatabase", pService.getPhotos());
         return "index";
     }
 
@@ -39,34 +39,16 @@ public class PhotoController {
     }
 
     public static class Form {
-        private String customerName;
-        private String subject;
-        private String body;
+        private String caption;
         private List<MultipartFile> attachments;
 
-        // Getters and Setters of customerName, subject, body, attachments
-        public String getCustomerName() {
-            return customerName;
+        // Getters and Setters of body, attachments
+        public String getCaption() {
+            return caption;
         }
 
-        public void setCustomerName(String customerName) {
-            this.customerName = customerName;
-        }
-
-        public String getSubject() {
-            return subject;
-        }
-
-        public void setSubject(String subject) {
-            this.subject = subject;
-        }
-
-        public String getBody() {
-            return body;
-        }
-
-        public void setBody(String body) {
-            this.body = body;
+        public void setCatpion(String caption) {
+            this.caption = caption;
         }
 
         public List<MultipartFile> getAttachments() {
@@ -80,8 +62,7 @@ public class PhotoController {
 
     @PostMapping("/create")
     public View create(Form form) throws IOException {
-        long photoId = tService.createPhoto(form.getCustomerName(),
-                form.getSubject(), form.getBody(), form.getAttachments());
+        long photoId = pService.createPhoto(form.getCaption(), form.getAttachments());
         return new RedirectView("/view/" + photoId, true);
     }
 
@@ -89,7 +70,7 @@ public class PhotoController {
     public String view(@PathVariable("photoId") long photoId,
                        ModelMap model)
             throws PhotoNotFound {
-        Photo photo = tService.getPhoto(photoId);
+        Photo photo = pService.getPhoto(photoId);
         model.addAttribute("photoId", photoId);
         model.addAttribute("photo", photo);
         return "view";
@@ -99,7 +80,7 @@ public class PhotoController {
     public View download(@PathVariable("photoId") long photoId,
                          @PathVariable("attachment") UUID attachmentId)
             throws PhotoNotFound, AttachmentNotFound {
-        Attachment attachment = tService.getAttachment(photoId, attachmentId);
+        Attachment attachment = pService.getAttachment(photoId, attachmentId);
         return new DownloadingView(attachment.getName(),
                     attachment.getMimeContentType(), attachment.getContents());
     }
@@ -107,7 +88,7 @@ public class PhotoController {
     @GetMapping("/delete/{photoId}")
     public String deletePhoto(@PathVariable("photoId") long photoId)
             throws PhotoNotFound {
-        tService.delete(photoId);
+        pService.delete(photoId);
         return "redirect:/index";
     }
 
@@ -115,7 +96,7 @@ public class PhotoController {
     public String deleteAttachment(@PathVariable("photoId") long photoId,
                                    @PathVariable("attachment") UUID attachmentId)
             throws PhotoNotFound, AttachmentNotFound {
-        tService.deleteAttachment(photoId, attachmentId);
+        pService.deleteAttachment(photoId, attachmentId);
         return "redirect:/view/" + photoId;
     }
 

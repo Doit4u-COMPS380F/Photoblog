@@ -11,13 +11,13 @@
                     <a class="nav-link active" aria-current="page" href="/Doit4u/Photoblog/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Doit4u/Photoblog/create">Upload a Photo</a>
+                    <a class="nav-link" href="/Doit4u/Photoblog/create">Upload Photo</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="#">My Gallery</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="#">Account Details</a>
                 </li>
                 <li><hr class="dropdown-divider"></li>
                 <li class="nav-item">

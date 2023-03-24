@@ -13,9 +13,7 @@ public class Photo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "name")
-    private String customerName;
-    private String subject;
-    private String body;
+    private String caption;
 
     @OneToMany(mappedBy = "photo", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)
@@ -31,28 +29,12 @@ public class Photo {
         this.id = id;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getCaption() {
+        return caption;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 
     public List<Attachment> getAttachments() {

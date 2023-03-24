@@ -8,10 +8,10 @@
 <body>
 <%@include file="nav.jsp" %>
 <div class="container mt-5">
-<h2>Photo #${photoId}: <c:out value="${photo.subject}"/></h2>
+<h2>Photo #${photoId}</h2>
 [<a href="<c:url value="/delete/${photo.id}" />">Delete</a>]<br/><br/>
-<i>Customer Name - <c:out value="${photo.customerName}"/></i><br/><br/>
-<c:out value="${photo.body}"/><br/><br/>
+<%--<i>Customer Name - <c:out value="${photo.customerName}"/></i><br/><br/>--%>
+<%--<c:out value="${photo.body}"/><br/><br/>--%>
 <c:if test="${!empty photo.attachments}">
     Attachments:
     <c:forEach items="${photo.attachments}" var="attachment" varStatus="status">
