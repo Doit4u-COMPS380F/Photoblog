@@ -17,6 +17,7 @@
     <c:forEach items="${photo.attachments}" var="attachment" varStatus="status">
         <c:if test="${!status.first}">, </c:if>
         <a href="<c:url value="/${photoId}/attachment/${attachment.id}" />">
+            <img src="<c:url value='/${photoId}/attachment/${attachment.id}' />" alt="<c:out value='${attachment.name}'/>">
             <c:out value="${attachment.name}"/></a>
         [<a href="<c:url value="/${photoId}/delete/${attachment.id}"/>">Delete</a>]
     </c:forEach><br/><br/>

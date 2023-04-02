@@ -22,6 +22,7 @@
     </c:otherwise>
     </c:choose>
     <footer>
+        <br><br>
         <p>Copyright &copy; 2023 HKMU COMP-S380F Photoblog.</p>
         <p>All rights reserved.</p>
         <p>Contact us at contact@doit4u.com.</p>
