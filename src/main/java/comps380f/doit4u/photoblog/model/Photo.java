@@ -12,7 +12,8 @@ public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "name")
+//    @Column(name = "name")
+    private String username;
     private String caption;
 
     @OneToMany(mappedBy = "photo", fetch = FetchType.EAGER,
@@ -29,9 +30,11 @@ public class Photo {
         this.id = id;
     }
 
-    public String getCaption() {
-        return caption;
-    }
+    public String getUsername() { return username; }
+
+    public void setUsername(String username) { this.username = username; }
+
+    public String getCaption() { return caption; }
 
     public void setCaption(String caption) {
         this.caption = caption;

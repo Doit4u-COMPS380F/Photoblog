@@ -77,9 +77,10 @@ public class PhotoService {
     }
 
     @Transactional
-    public long createPhoto(String caption, List<MultipartFile> attachments)
+    public long createPhoto(String username, String caption, List<MultipartFile> attachments)
             throws IOException {
         Photo photo = new Photo();
+        photo.setUsername(username);
         photo.setCaption(caption);
 
         for (MultipartFile filePart : attachments) {
@@ -96,5 +97,29 @@ public class PhotoService {
         }
         Photo savedPhoto = pRepo.save(photo);
         return savedPhoto.getId();
+    }
+
+    @Transactional(rollbackFor = PhotoNotFound.class)
+    public void updatePhoto(long id, String caption, List<MultipartFile> attachments)
+            throws IOException, PhotoNotFound {
+        Photo updatedPhoto = pRepo.findById(id).orElse(null);
+        if (updatedPhoto == null) {
+            throw new PhotoNotFound(id);
+        }
+        updatedPhoto.setCaption(caption);
+
+        for (MultipartFile filePart : attachments) {
+            Attachment attachment = new Attachment();
+            attachment.setName(filePart.getOriginalFilename());
+            attachment.setMimeContentType(filePart.getContentType());
+            attachment.setContents(filePart.getBytes());
+            attachment.setPhoto(updatedPhoto);
+            if (attachment.getName() != null && attachment.getName().length() > 0
+                    && attachment.getContents() != null
+                    && attachment.getContents().length > 0) {
+                updatedPhoto.getAttachments().add(attachment);
+            }
+        }
+        pRepo.save(updatedPhoto);
     }
 }

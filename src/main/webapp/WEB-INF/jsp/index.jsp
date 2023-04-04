@@ -7,7 +7,7 @@
 <body>
 <%@include file="nav.jsp" %>
 <div class="container mt-5">
-<%--    <h1>Photoblog</h1>--%>
+    <%--    <h1>Photoblog</h1>--%>
     <c:choose>
     <c:when test="${fn:length(photoDatabase) == 0}">
     <i>There are no photos in the system.</i>
@@ -17,7 +17,17 @@
     Photo ${entry.id}:
     <a href="<c:url value="/view/${entry.id}" />">
         <c:out value="${entry.id}"/></a>
-    [<a href="<c:url value="/delete/${entry.id}" />">Delete</a>]<br/>
+<%--        <c:forEach items="${attachmentDatabase}" var="entry2">--%>
+<%--        Attachment ${entry2.id}:--%>
+<%--        <img src="<c:url value='/${entry.id}/attachment/${entry2.id}' />" alt="<c:out value='${entry2.id}'/>">--%>
+<%--        </c:forEach>--%>
+    <security:authorize access="hasRole('ADMIN') or principal.username=='${entry.username}'">
+    [<a href="<c:url value="/edit/${entry.id}" />">Edit</a>]
+    </security:authorize>
+    <security:authorize access="hasRole('ADMIN')">
+    [<a href="<c:url value="/delete/${entry.id}" />">Delete</a>]
+    </security:authorize>
+    <br/>
     </c:forEach>
     </c:otherwise>
     </c:choose>

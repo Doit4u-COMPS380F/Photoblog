@@ -11,13 +11,13 @@
     <h2>Upload a Photo</h2>
     <form:form method="POST" enctype="multipart/form-data" modelAttribute="photoForm">
     <b>Photo upload</b><br/>
-    <input type="file" id="attachments" name="attachments" accept="image/*" onchange="previewImage(this);"><br>
+    <input type="file" id="attachments" name="attachments" accept="image/*" multiple="multiple" required onchange="previewImage(this);"><br>
     <img id="preview" src="" alt="Image Preview" style="max-width: 200px; max-height: 200px; display: none;"><br>
     <form:label path="caption">Caption</form:label><br/>
         <form:textarea path="caption" rows="5" cols="30"/><br/><br/>
     <input type="submit" value="Submit"/>
     </form:form>
-
+</div>
 </body>
 </html>
 <script>
