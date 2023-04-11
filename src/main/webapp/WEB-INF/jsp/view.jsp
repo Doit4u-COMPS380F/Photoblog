@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Customer Support</title>
+    <title>Photoblog</title>
 </head>
 <body>
 <h2>Ticket #${ticketId}: <c:out value="${ticket.subject}"/></h2>

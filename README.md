@@ -27,3 +27,14 @@
 | Event / Issue | Date |
 | - | - |
 | Project Repository Initialized | 15 Mar 2023 |
+
+## 5. TEST ACCOUNT
+| USERNAME | PASSWORD | ROLE |
+| - | - | - |
+| {NAME} | {NAME} + pw | ROLE |
+| admin | adminpw | ROLE_USER, ROLE_ADMIN |
+| keith | keithpw | ROLE_USER, ROLE_ADMIN |
+| john | johnpw | ROLE_USER |
+| mary | marypw | ROLE_ADMIN |
+
+## 6. BUG REPORTS

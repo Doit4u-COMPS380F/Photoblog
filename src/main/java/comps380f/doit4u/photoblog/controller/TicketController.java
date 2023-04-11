@@ -7,6 +7,7 @@ import comps380f.doit4u.photoblog.model.Attachment;
 import comps380f.doit4u.photoblog.model.Ticket;
 import comps380f.doit4u.photoblog.view.DownloadingView;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,20 +41,11 @@ public class TicketController {
     }
 
     public static class Form {
-        private String customerName;
         private String subject;
         private String body;
         private List<MultipartFile> attachments;
 
         // Getters and Setters of customerName, subject, body, attachments
-        public String getCustomerName() {
-            return customerName;
-        }
-
-        public void setCustomerName(String customerName) {
-            this.customerName = customerName;
-        }
-
         public String getSubject() {
             return subject;
         }
@@ -79,8 +72,8 @@ public class TicketController {
     }
 
     @PostMapping("/create")
-    public View create(Form form) throws IOException {
-        long ticketId = tService.createTicket(form.getCustomerName(),
+    public View create(Form form, Principal principal) throws IOException {
+        long ticketId = tService.createTicket(principal.getName(),
                 form.getSubject(), form.getBody(), form.getAttachments());
         return new RedirectView("/ticket/view/" + ticketId, true);
     }
@@ -101,7 +94,7 @@ public class TicketController {
             throws TicketNotFound, AttachmentNotFound {
         Attachment attachment = tService.getAttachment(ticketId, attachmentId);
         return new DownloadingView(attachment.getName(),
-                    attachment.getMimeContentType(), attachment.getContents());
+                attachment.getMimeContentType(), attachment.getContents());
     }
 
     @GetMapping("/delete/{ticketId}")
@@ -116,6 +109,44 @@ public class TicketController {
                                    @PathVariable("attachment") UUID attachmentId)
             throws TicketNotFound, AttachmentNotFound {
         tService.deleteAttachment(ticketId, attachmentId);
+        return "redirect:/ticket/view/" + ticketId;
+    }
+
+    @GetMapping("/edit/{ticketId}")
+    public ModelAndView showEdit(@PathVariable("ticketId") long ticketId,
+                                 Principal principal, HttpServletRequest request)
+            throws TicketNotFound {
+        Ticket ticket = tService.getTicket(ticketId);
+        if (ticket == null
+                || (!request.isUserInRole("ROLE_ADMIN")
+                && !principal.getName().equals(ticket.getCustomerName()))) {
+            return new ModelAndView(new RedirectView("/ticket/list", true));
+        }
+
+        ModelAndView modelAndView = new ModelAndView("edit");
+        modelAndView.addObject("ticket", ticket);
+
+        Form ticketForm = new Form();
+        ticketForm.setSubject(ticket.getSubject());
+        ticketForm.setBody(ticket.getBody());
+        modelAndView.addObject("ticketForm", ticketForm);
+
+        return modelAndView;
+    }
+
+    @PostMapping("/edit/{ticketId}")
+    public String edit(@PathVariable("ticketId") long ticketId, Form form,
+                       Principal principal, HttpServletRequest request)
+            throws IOException, TicketNotFound {
+        Ticket ticket = tService.getTicket(ticketId);
+        if (ticket == null
+                || (!request.isUserInRole("ROLE_ADMIN")
+                && !principal.getName().equals(ticket.getCustomerName()))) {
+            return "redirect:/ticket/list";
+        }
+
+        tService.updateTicket(ticketId, form.getSubject(),
+                form.getBody(), form.getAttachments());
         return "redirect:/ticket/view/" + ticketId;
     }
 
