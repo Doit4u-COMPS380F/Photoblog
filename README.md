@@ -27,3 +27,10 @@
 | Event / Issue | Date |
 | - | - |
 | Project Repository Initialized | 15 Mar 2023 |
+
+## 5. Test Users
+| Username | Passowrd | Role |
+| admin | adminPw! | ADMIN, USER |
+| keith | keithPw! | ADMIN, USER |
+| user1 | user1Pw! | USER |
+| user2 | user2Pw! | USER |

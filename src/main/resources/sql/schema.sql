@@ -23,8 +23,8 @@ create table if not exists attachment (
 );
 
 create table if not exists users (
-    username varchar(255) not null,
-    password varchar(255),
+    username varchar(50) not null,
+    password varchar(100) not null,
     primary key (username)
 );
 

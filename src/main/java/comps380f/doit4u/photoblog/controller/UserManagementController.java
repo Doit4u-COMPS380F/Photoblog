@@ -7,7 +7,10 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -19,6 +22,11 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/user")
 public class UserManagementController {
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserValidator userValidator;
 
@@ -85,13 +93,16 @@ public class UserManagementController {
         if (result.hasErrors()) { return "addUser"; }
 
         umService.createPhotoUser(form.getUsername(),
-                form.getPassword(), form.getRoles());
-        return "redirect:/user/list";
+//                form.getPassword(), form.getRoles());
+                passwordEncoder.encode(form.getPassword()), form.getRoles());
+        logger.info("User " + form.getUsername() + " created.");
+        return "redirect:/user";
     }
 
     @GetMapping("/delete/{username}")
     public String deletePhoto(@PathVariable("username") String username) {
         umService.delete(username);
-        return "redirect:/user/list";
+        logger.info("User " + username + " deleted.");
+        return "redirect:/user";
     }
 }

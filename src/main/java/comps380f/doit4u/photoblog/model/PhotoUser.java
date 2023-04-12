@@ -21,7 +21,8 @@ public class PhotoUser {
 
     public PhotoUser(String username, String password, String[] roles) {
         this.username = username;
-        this.password = "{noop}" + password;
+//        this.password = "{noop}" + password;
+        this.password = password;
         for (String role : roles) {
             this.roles.add(new UserRole(this, role));
         }
