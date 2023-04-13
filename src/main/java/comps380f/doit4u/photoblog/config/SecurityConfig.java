@@ -19,7 +19,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/user/**").hasRole("ADMIN")
-//                        .requestMatchers("/user/**").permitAll() #when no user in db
+//                        .requestMatchers("/user/**").permitAll() // when no user in db
                         .requestMatchers("/photo/delete/**").hasRole("ADMIN")
                         .requestMatchers("/photo/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().permitAll()
