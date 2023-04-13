@@ -9,24 +9,27 @@
 <div class="container mt-5">
     <h2>Account admin</h2>
 
-    <a href="<c:url value="/user/create" />">Create a User</a><br/><br/>
+    <a href="<c:url value="/user/create" />" class="btn btn-primary">Create a User</a><br/><br/>
 
     <c:choose>
         <c:when test="${fn:length(photoUsers) == 0}">
             <i>There are no users in the system.</i>
         </c:when>
         <c:otherwise>
-            <table>
+            <table class="table">
+                <thead>
                 <tr>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Roles</th>
-                    <th>Action</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Roles</th>
+                    <th scope="col">Action</th>
                 </tr>
+                </thead>
+                <tbody>
                 <c:forEach items="${photoUsers}" var="user">
                     <tr>
                         <td>${user.username}</td>
-<%--                        <td>${fn:substringAfter(user.password, '{noop}')}</td>--%>
+                            <%--<td>${fn:substringAfter(user.password, '{noop}')}</td>--%>
                         <td>${user.password}</td>
                         <td>
                             <c:forEach items="${user.roles}" var="role" varStatus="status">
@@ -35,10 +38,11 @@
                             </c:forEach>
                         </td>
                         <td>
-                            [<a href="<c:url value="/user/delete/${user.username}" />">Delete</a>]
+                            <a href="<c:url value="/user/delete/${user.username}" />" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 </c:forEach>
+                </tbody>
             </table>
         </c:otherwise>
     </c:choose>
