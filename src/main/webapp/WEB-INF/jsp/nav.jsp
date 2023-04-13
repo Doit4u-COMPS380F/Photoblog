@@ -24,13 +24,24 @@
                         <a class="nav-link" href="<c:url value="/user" />">Manage User Accounts</a>
                     </li>
                 </security:authorize>
+                <security:authorize access="hasAnyRole('USER', 'ADMIN')">
                 <li class=nav-item"">
-                    <c:url var="logoutUrl" value="/logout"/>
-                    <form action="${logoutUrl}" method="post">
-                        <input type="submit" value="Log out"/>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    </form>
+<%--                    <c:url var="logoutUrl" value="/logout"/>--%>
+                    <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
+<%--                    <form action="${logoutUrl}" method="post">--%>
+<%--                        <input type="submit" value="Log out"/>--%>
+<%--                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+<%--                    </form>--%>
                 </li>
+                </security:authorize>
+                <security:authorize access="!isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/login"/>">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="#"/>">Register</a>
+                    </li>
+                </security:authorize>
                 <%--                <li class="nav-item">--%>
                 <%--                    <a class="nav-link" href="/Doit4u/Photoblog/user/logout">Login / Logout</a>--%>
                 <%--                </li>--%>
