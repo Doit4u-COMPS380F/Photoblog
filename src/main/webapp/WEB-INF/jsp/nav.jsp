@@ -21,7 +21,7 @@
                 </li>
                 <security:authorize access="hasRole('ADMIN')">
                     <li class="nav-item">
-                        <a href="<c:url value="/user" />">Manage User Accounts</a><br /><br />
+                        <a class="nav-link" href="<c:url value="/user" />">Manage User Accounts</a>
                     </li>
                 </security:authorize>
                 <li class=nav-item"">

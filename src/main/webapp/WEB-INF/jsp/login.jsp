@@ -2,8 +2,11 @@
 <html data-bs-theme="dark">
 <head>
     <title>Doit4u Photoblog Login</title>
+    <%@include file="header.jsp" %>
 </head>
 <body>
+<%@include file="nav.jsp" %>
+<div class="container mt-5">
 <c:if test="${param.error != null}">
     <p>Login failed.</p>
 </c:if>
@@ -21,6 +24,7 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="Log In"/>
 </form>
+</div>
 </body>
 </html>
 

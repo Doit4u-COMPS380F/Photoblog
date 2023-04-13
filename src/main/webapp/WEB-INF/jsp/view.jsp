@@ -24,7 +24,9 @@
 <%--    <a href="<c:url value="/${photoId}/attachment/${attachment.id}" />">--%>
         <img src="<c:url value='/${photoId}/attachment/${attachment.id}' />" alt="<c:out value='${attachment.name}'/>">
 <%--        <c:out value="${attachment.name}"/></a>--%>
+    <security:authorize access="hasRole('ADMIN')">
     [<a href="<c:url value="/${photoId}/delete/${attachment.id}"/>">Delete</a>]
+    </security:authorize>
     </c:forEach><br/><br/>
     </c:if>
     <i>Post by: <c:out value="${photo.username}"/></i><br/><br/>
