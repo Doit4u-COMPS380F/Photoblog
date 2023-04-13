@@ -11,6 +11,9 @@
                 <%--                    <a class="nav-link active" aria-current="page" href="/Doit4u/Photoblog/">Home</a>--%>
                 <%--                </li>--%>
                 <li class="nav-item">
+                    <a class="nav-link" href="/Doit4u/Photoblog/index">Home</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="/Doit4u/Photoblog/create">Upload</a>
                 </li>
                 <li class="nav-item">
@@ -26,12 +29,11 @@
                 </security:authorize>
                 <security:authorize access="hasAnyRole('USER', 'ADMIN')">
                 <li class=nav-item"">
-<%--                    <c:url var="logoutUrl" value="/logout"/>--%>
-                    <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
-<%--                    <form action="${logoutUrl}" method="post">--%>
-<%--                        <input type="submit" value="Log out"/>--%>
-<%--                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-<%--                    </form>--%>
+                    <c:url var="logoutUrl" value="/logout"/>
+                    <form id="logout-form" action="${logoutUrl}" method="post">
+                        <a class="nav-link" href="#" onclick="document.getElementById('logout-form').submit(); return false;">Logout</a>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form>
                 </li>
                 </security:authorize>
                 <security:authorize access="!isAuthenticated()">
