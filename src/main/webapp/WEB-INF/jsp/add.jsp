@@ -18,7 +18,7 @@
         <div class="mb-3 d-none" id="previewCarousel">
             <label for="preview" class="form-label">Preview</label>
             <div id="preview" class="carousel slide">
-                <div class="caroussel-inner">
+                <div class="carousel-inner">
 
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#preview"
