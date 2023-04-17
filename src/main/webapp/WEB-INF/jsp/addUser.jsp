@@ -29,6 +29,14 @@
         <form:errors path="confirm_password" cssClass="error" />
         <form:input type="text" path="confirm_password" /><br/><br/>
 
+        <form:label path="phone">Phone</form:label><br/>
+        <form:errors path="phone" cssClass="error" />
+        <form:input type="text" path="phone" /><br/><br/>
+
+        <form:label path="email">E-Mail</form:label><br/>
+        <form:errors path="email" cssClass="error" />
+        <form:input type="text" path="email" /><br/><br/>
+
         <form:label path="roles">Roles</form:label><br/>
         <form:errors path="roles" cssClass="error" />
         <form:checkbox path="roles" value="ROLE_USER"/>ROLE_USER

@@ -25,6 +25,8 @@ create table if not exists attachment (
 create table if not exists users (
     username varchar(50) not null,
     password varchar(100) not null,
+    phone varchar(12),
+    email varchar(100),
     primary key (username)
 );
 

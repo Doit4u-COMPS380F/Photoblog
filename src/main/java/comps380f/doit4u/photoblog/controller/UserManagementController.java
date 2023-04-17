@@ -1,6 +1,7 @@
 package comps380f.doit4u.photoblog.controller;
 
 import comps380f.doit4u.photoblog.dao.UserManagementService;
+import comps380f.doit4u.photoblog.model.PhotoUser;
 import comps380f.doit4u.photoblog.validator.UserValidator;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -23,13 +24,10 @@ import java.io.IOException;
 @RequestMapping("/user")
 public class UserManagementController {
     private final Logger logger = LogManager.getLogger(this.getClass());
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private UserValidator userValidator;
-
     @Resource
     UserManagementService umService;
 
@@ -50,6 +48,11 @@ public class UserManagementController {
         })
         private String password;
         private String confirm_password;
+        //@NotEmpty
+        //@Size(max=12, message="Please input valid phone number.")
+        private String phone;
+        //@NotEmpty
+        private String email;
         @NotEmpty(message="Please select at least one role.")
         private String[] roles;
 
@@ -79,6 +82,22 @@ public class UserManagementController {
         public void setRoles(String[] roles) {
             this.roles = roles;
         }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
     }
 
     @GetMapping("/create")
@@ -94,10 +113,13 @@ public class UserManagementController {
 
         umService.createPhotoUser(form.getUsername(),
 //                form.getPassword(), form.getRoles());
-                passwordEncoder.encode(form.getPassword()), form.getRoles());
+                passwordEncoder.encode(form.getPassword()),
+                form.getPhone(), form.getEmail(), form.getRoles());
         logger.info("User " + form.getUsername() + " created.");
         return "redirect:/user";
     }
+
+    //@GetMapping('/edit/{username}')
 
     @GetMapping("/delete/{username}")
     public String deletePhoto(@PathVariable("username") String username) {
