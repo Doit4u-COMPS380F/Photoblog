@@ -10,10 +10,10 @@
 <div class="container mt-5">
     <h2 style="display: inline-block;">Photo #${photoId}</h2>
 <%--    [<a href="<c:url value="/delete/${photo.id}" />">Delete</a>]<br/><br/>--%>
-    <security:authorize access="hasRole('ADMIN') or principal.username=='${photo.username}'">
+    <security:authorize access="isAuthenticated() and (hasRole('ADMIN') or principal.username=='${photo.username}')">
     [<a href="<c:url value="/edit/${photo.id}" />">Edit</a>]
     </security:authorize>
-    <security:authorize access="hasRole('ADMIN')">
+    <security:authorize access="isAuthenticated() and hasRole('ADMIN')">
     [<a href="<c:url value="/delete/${photo.id}" />">Delete</a>]
     </security:authorize>
     <br/><br/>
@@ -24,7 +24,7 @@
 <%--    <a href="<c:url value="/${photoId}/attachment/${attachment.id}" />">--%>
         <img src="<c:url value='/${photoId}/attachment/${attachment.id}' />" alt="<c:out value='${attachment.name}'/>">
 <%--        <c:out value="${attachment.name}"/></a>--%>
-    <security:authorize access="hasRole('ADMIN')">
+    <security:authorize access="isAuthenticated() and hasRole('ADMIN')">
     [<a href="<c:url value="/${photoId}/delete/${attachment.id}"/>">Delete</a>]
     </security:authorize>
     </c:forEach><br/><br/>

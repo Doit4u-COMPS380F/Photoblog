@@ -18,11 +18,14 @@ public class SecurityConfig {
             throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/user/**").hasRole("ADMIN")
-//                        .requestMatchers("/user/**").permitAll() #when no user in db
-                        .requestMatchers("/photo/delete/**").hasRole("ADMIN")
-                        .requestMatchers("/photo/**").hasAnyRole("USER", "ADMIN")
-                        .anyRequest().permitAll()
+                                .requestMatchers("/user").hasRole("ADMIN")
+//                              .requestMatchers("/user/**").permitAll() #when no user in db
+                                .requestMatchers("/photo/delete/**").hasRole("ADMIN")
+                                .requestMatchers("/create/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/photo/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/index/**").permitAll()
+                                .requestMatchers("/user/create").permitAll()
+                                .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
