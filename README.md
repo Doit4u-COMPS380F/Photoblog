@@ -12,8 +12,8 @@
 #### *** One single task can be shared by multiple team mates
 | Tasks | Person / People |
 | -| - |
-| Photo Upload | Kevin Li  |
-| Comment Section  |  Eric Chan |
+| Photo Upload | Eric Chan  |
+| Comment Section  |  Kevin Li |
 | User Management (Login/Logout/Register) | Rex Ng |
 | Database | ykcccccc |
 
