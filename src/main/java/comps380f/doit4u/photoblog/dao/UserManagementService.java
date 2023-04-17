@@ -11,25 +11,25 @@ import java.util.List;
 @Service
 public class UserManagementService {
     @Resource
-    private PhotoUserRepository tuRepo;
+    private PhotoUserRepository puRepo;
 
     @Transactional
     public List<PhotoUser> getPhotoUsers() {
-        return tuRepo.findAll();
+        return puRepo.findAll();
     }
 
     @Transactional
     public void delete(String username) {
-        PhotoUser photoUser = tuRepo.findById(username).orElse(null);
+        PhotoUser photoUser = puRepo.findById(username).orElse(null);
         if (photoUser == null) {
             throw new UsernameNotFoundException("User '" + username + "' not found.");
         }
-        tuRepo.delete(photoUser);
+        puRepo.delete(photoUser);
     }
 
     @Transactional
-    public void createPhotoUser(String username, String password, String[] roles) {
-        PhotoUser user = new PhotoUser(username, password, roles);
-        tuRepo.save(user);
+    public void createPhotoUser(String username, String password, String phone, String email,  String[] roles) {
+        PhotoUser user = new PhotoUser(username, password, phone, email, roles);
+        puRepo.save(user);
     }
 }

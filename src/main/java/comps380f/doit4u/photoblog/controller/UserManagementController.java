@@ -52,6 +52,8 @@ public class UserManagementController {
         })
         private String password;
         private String confirm_password;
+        private String phone;
+        private String email;
         @NotEmpty(message="Please select at least one role.")
         private String[] roles;
 
@@ -74,6 +76,14 @@ public class UserManagementController {
 
         public void setConfirm_password(String confirm_password) { this.confirm_password = confirm_password; }
 
+        public String getPhone() { return phone; }
+
+        public void setPhone(String phone) { this.phone = phone; }
+
+        public String getEmail() { return email; }
+
+        public void setEmail(String email) { this.email = email; }
+
         public String[] getRoles() {
             return roles;
         }
@@ -95,7 +105,7 @@ public class UserManagementController {
         if (result.hasErrors()) { return "addUser"; }
 
         umService.createPhotoUser(form.getUsername(),
-                passwordEncoder.encode(form.getPassword()), form.getRoles());
+                passwordEncoder.encode(form.getPassword()), form.getPhone(), form.getEmail(), form.getRoles());
         logger.info("User " + form.getUsername() + " created.");
 
         // Check if the current user has ADMIN role

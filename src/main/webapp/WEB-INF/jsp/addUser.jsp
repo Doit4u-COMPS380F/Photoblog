@@ -52,6 +52,16 @@
             <form:input type="password" path="confirm_password" class="form-control"/>
             <form:errors path="confirm_password" cssClass="error" class="invalid-feedback"/>
         </div>
+        <div class="mb-3">
+            <form:label path="phone" class="form-label">Phone</form:label>
+            <form:input type="text" path="phone" class="form-control"/>
+            <form:errors path="phone"/>
+        </div>
+        <div class="mb-3">
+            <form:label path="email" class="form-label">Email</form:label>
+            <form:input type="text" path="email" class="form-control"/>
+            <form:errors path="email"/>
+        </div>
 <%--        re--%>
         <security:authorize access="hasRole('ADMIN')">
             <div class="mb-3">

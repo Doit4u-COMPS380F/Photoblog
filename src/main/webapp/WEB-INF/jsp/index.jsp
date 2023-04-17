@@ -11,7 +11,7 @@
             margin-bottom: 20px;
         }
         .card-body {
-            height: 300px; /* set a fixed height for the card body */
+            height: 400px; /* set a fixed height for the card body */
             overflow: hidden; /* ensure that the card body does not get affected by the size of the images */
             object-fit: contain;
         }
