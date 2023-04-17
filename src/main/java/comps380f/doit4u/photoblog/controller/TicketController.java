@@ -79,9 +79,7 @@ public class TicketController {
     }
 
     @GetMapping("/view/{ticketId}")
-    public String view(@PathVariable("ticketId") long ticketId,
-                       ModelMap model)
-            throws TicketNotFound {
+    public String view(@PathVariable("ticketId") long ticketId, ModelMap model) throws TicketNotFound {
         Ticket ticket = tService.getTicket(ticketId);
         model.addAttribute("ticketId", ticketId);
         model.addAttribute("ticket", ticket);

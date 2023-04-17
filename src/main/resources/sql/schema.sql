@@ -15,13 +15,11 @@ create table if not exists attachment (
       foreign key (ticket_id) references ticket
 );
 
-create table if not exists comments (
-    id uuid default random_uuid() not null,
-    content varchar(255),
-    author varchar(255),
-    originalpost bigint,
-    primary key (id),
-    foreign key (originalpost) references ticket
+CREATE TABLE IF NOT EXISTS comment (
+    id int auto_increment,
+    content varchar(255) NOT NULL,
+    author varchar(255) NOT NULL,
+    reference varchar(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS users (

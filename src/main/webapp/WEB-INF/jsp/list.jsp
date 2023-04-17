@@ -38,10 +38,14 @@
       <a href="<c:url value="/ticket/view/${entry.id}" />">
         <c:out value="${entry.subject}"/></a>
       (Uploader: <c:out value="${entry.customerName}"/>)
+      <!-- COMMENT -->
+      [<a href="<c:url value="/ticket/comment/${entry.id}" />">Comment</a>]
+      <!-- EDIT -->
       <security:authorize access="hasRole('ADMIN') or
                                 principal.username=='${entry.customerName}'">
         [<a href="<c:url value="/ticket/edit/${entry.id}" />">Edit</a>]
       </security:authorize>
+      <!-- DELETE -->
       <security:authorize access="hasRole('ADMIN')">
         [<a href="<c:url value="/ticket/delete/${entry.id}" />">Delete</a>]
       </security:authorize>
