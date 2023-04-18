@@ -10,15 +10,21 @@
                 <%--                <li class="nav-item">--%>
                 <%--                    <a class="nav-link active" aria-current="page" href="/Doit4u/Photoblog/">Home</a>--%>
                 <%--                </li>--%>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Doit4u/Photoblog/create">Upload ⬆️</a>
-                </li>
-                <li class="nav-item">
+                <security:authorize access="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Doit4u/Photoblog/create">Upload ⬆️</a>
+                    </li>
+                </security:authorize>
+                <security:authorize access="isAuthenticated()">
+                    <li class="nav-item">
                     <a class="nav-link" href="#">My Gallery 🖼️</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">My Account Details ℹ️</a>
-                </li>
+                </security:authorize>
+                <security:authorize access="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Account Details ℹ️</a>
+                    </li>
+                </security:authorize>
                 <security:authorize access="hasRole('ADMIN')">
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/user" />">Manage User Accounts 🔨</a>
@@ -33,6 +39,9 @@
             <a href="<c:url value="/user/create"/>" class="btn btn-info">Register</a>
         </c:if>
         <c:if test="${not empty pageContext.request.userPrincipal}">
+            <security:authorize access="isAuthenticated()">
+                <p>Welcome, <security:authentication property="principal.username" /></p>
+            </security:authorize>
             <c:url var="logoutUrl" value="/logout"/>
             <form action="${logoutUrl}" method="post" class="d-flex">
                 <input type="submit" value="Log out" class="btn btn-outline-danger"/>
