@@ -36,13 +36,13 @@ public class CommentController {
         System.out.println("Ready to Save Comment");
         commentService.saveComment(comment);
         System.out.println("A Comment is Saved");
-        return "redirect:/read-comment";
+        return "redirect:/comment/read-comment";
     }
 
     @RequestMapping(value = "/delete-comment/{id}")
     public String deleteComment(@PathVariable int id) {
         commentService.deleteById(id);
-        return "redirect:/read-comment";
+        return "redirect:/comment/read-comment";
     }
 
 }

@@ -13,9 +13,9 @@
             <td>${comment.content}</td>
             <td>${comment.author}</td>
             <td>${comment.reference}</td>
-            <td><a href="/delete-comment/${comment.id}">Delete</a></td>
+            <td><a href="/Doit4u/Photoblog/comment/delete-comment/${comment.id}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
 <br/>
-<a href="/create-comment">Create Comment</a>
+<a href="/Doit4u/Photoblog//comment/create-comment">Create Comment</a>

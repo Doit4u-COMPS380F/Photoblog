@@ -1,5 +1,5 @@
 <h1>Create Comment</h1>
-<form:form method="post" action="/create-comment">
+<form:form method="post" action="/Doit4u/Photoblog/comment/create-comment">
     <table>
         <tr>
             <td>Content: </td>
