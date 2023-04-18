@@ -10,7 +10,7 @@
             <td><form:input path="author"/></td>
         </tr>
         <tr>
-            <td>Original Post: </td>
+            <td>Reference: </td>
             <td><form:input path="reference"/></td>
         </tr>
         <tr>

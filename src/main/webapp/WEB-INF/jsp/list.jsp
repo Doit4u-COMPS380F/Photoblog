@@ -39,7 +39,8 @@
         <c:out value="${entry.subject}"/></a>
       (Uploader: <c:out value="${entry.customerName}"/>)
       <!-- COMMENT -->
-      [<a href="<c:url value="/ticket/comment/${entry.id}" />">Comment</a>]
+      [<a href="<c:url value="/comment/create-comment" />">Comment</a>]
+
       <!-- EDIT -->
       <security:authorize access="hasRole('ADMIN') or
                                 principal.username=='${entry.customerName}'">
