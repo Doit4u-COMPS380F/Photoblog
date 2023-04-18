@@ -29,6 +29,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     compileOnly 'org.projectlombok:lombok'
+    implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'
 }
 
 tasks.named('test') {
