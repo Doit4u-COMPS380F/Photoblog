@@ -60,18 +60,11 @@ public class PhotoService {
     }
 
     @Transactional(rollbackFor = AttachmentNotFound.class)
-    public void deleteAttachment(long photoId, UUID attachmentId, long commentId)
+    public void deleteAttachment(long photoId, UUID attachmentId)
             throws PhotoNotFound, AttachmentNotFound {
         Photo photo = pRepo.findById(photoId).orElse(null);
         if (photo == null) {
             throw new PhotoNotFound(photoId);
-        }
-        for (Attachment attachment : photo.getAttachments()) {
-            if (attachment.getId().equals(attachmentId)) {
-                photo.deleteAttachment(attachment);
-                pRepo.save(photo);
-                return;
-            }
         }
         for (Attachment attachment : photo.getAttachments()) {
             if (attachment.getId().equals(attachmentId)) {
