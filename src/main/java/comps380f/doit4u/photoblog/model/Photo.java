@@ -12,7 +12,6 @@ public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-//    @Column(name = "name")
     private String username;
     private String caption;
 
@@ -20,6 +19,11 @@ public class Photo {
             cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     private List<Attachment> attachments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "photo", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Attachment> comments = new ArrayList<>();
 
     // getters and setters of all properties
     public long getId() {
@@ -48,9 +52,21 @@ public class Photo {
         this.attachments = attachments;
     }
 
+    public List<Attachment> getComments() { return comments; }
+
+    public void setComments(List<Attachment> comments) { this.comments = comments; }
+
     public void deleteAttachment(Attachment attachment) {
         attachment.setPhoto(null);
         this.attachments.remove(attachment);
+    }
+
+    public void updateComment);
+    }
+
+    public void deleteComment(Comment comment) {
+        comment.setPhoto(null);
+        this.comments.remove(comment);
     }
 }
 

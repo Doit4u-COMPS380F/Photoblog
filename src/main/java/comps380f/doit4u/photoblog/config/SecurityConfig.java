@@ -18,8 +18,8 @@ public class SecurityConfig {
             throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers("/user").hasRole("ADMIN")
-//                              .requestMatchers("/user/**").permitAll() #when no user in db
+                                .requestMatchers("/user").hasRole("ADMIN") ///when no user in db please hidden
+//                              .requestMatchers("/user/**").permitAll() //when no user in db please don't hidden
                                 .requestMatchers("/photo/delete/**").hasRole("ADMIN")
                                 .requestMatchers("/create/**").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/photo/**").hasAnyRole("USER", "ADMIN")

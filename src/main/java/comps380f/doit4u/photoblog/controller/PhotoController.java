@@ -92,9 +92,10 @@ public class PhotoController {
 
     @GetMapping("/{photoId}/delete/{attachment:.+}")
     public String deleteAttachment(@PathVariable("photoId") long photoId,
-                                   @PathVariable("attachment") UUID attachmentId)
+                                   @PathVariable("attachment") UUID attachmentId,
+                                   @PathVariable("comment") long commentId)
             throws PhotoNotFound, AttachmentNotFound {
-        pService.deleteAttachment(photoId, attachmentId);
+        pService.deleteAttachment(photoId, attachmentId, commentId);
         return "redirect:/view/" + photoId;
     }
 
