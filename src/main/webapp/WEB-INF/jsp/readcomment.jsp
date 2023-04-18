@@ -18,4 +18,4 @@
     </c:forEach>
 </table>
 <br/>
-<a href="/Doit4u/Photoblog//comment/create-comment">Create Comment</a>
+<a href="/Doit4u/Photoblog/comment/create-comment">Create Comment</a>
