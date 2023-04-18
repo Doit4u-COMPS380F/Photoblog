@@ -22,6 +22,7 @@
 | Page | Link |
 | - | - |
 | Index | localhost:8080/Doit4u/Photoblog/index |
+| Comment (for Developer) | localhost:8080/Doit4u/Photoblog/comment/read-comment |
 
 ## 4. Logbook
 | Event / Issue | Date |
