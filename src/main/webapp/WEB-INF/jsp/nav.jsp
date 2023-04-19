@@ -15,11 +15,11 @@
                         <a class="nav-link" href="/Doit4u/Photoblog/create">Upload ⬆️</a>
                     </li>
                 </security:authorize>
-                <security:authorize access="isAuthenticated()">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">My Gallery 🖼️</a>
-                    </li>
-                </security:authorize>
+<%--                <security:authorize access="isAuthenticated()">--%>
+<%--                    <li class="nav-item">--%>
+<%--                        <a class="nav-link" href="#">My Gallery 🖼️</a>--%>
+<%--                    </li>--%>
+<%--                </security:authorize>--%>
                 <security:authorize access="isAuthenticated()">
                     <li class="nav-item">
                         <a class="nav-link" href="<c:url value="/user/profile/${
