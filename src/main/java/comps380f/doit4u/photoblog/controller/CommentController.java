@@ -54,8 +54,12 @@ public class CommentController {
     }
     */
 
-    @RequestMapping("/create-comment")
-    public String showCreateCommentPage(Model model) {
+    @RequestMapping("/create-comment/{ticketId}")
+    public String showCreateCommentPage(@PathVariable("ticketId") long ticketId, Model model, Principal principal) {
+        String userName = principal.getName();
+        String reference = Long.toString(ticketId);
+        System.out.println("User name = " +userName);
+        System.out.println("Ticket ID = " +reference);
         System.out.println("Adding Attribute");
         model.addAttribute("command", new Comment());
         System.out.println("Ready to Return");
