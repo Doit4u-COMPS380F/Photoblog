@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html data-bs-theme="dark">
-<html>
 <head>
     <title>Photoblog - Upload</title>
     <%@include file="header.jsp" %>
