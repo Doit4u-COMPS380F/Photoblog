@@ -10,7 +10,7 @@
 -- INSERT INTO users (username, password) SELECT 'user2', '{noop}user2pw' WHERE NOT EXISTS (SELECT * FROM users WHERE username = 'user2');
 -- INSERT INTO user_roles (username, role) SELECT 'user2', 'ROLE_USER' WHERE NOT EXISTS (SELECT * FROM user_roles WHERE username = 'user2');
 
--- admin adminPw! ADMIN USER
--- keith keithPw! ADMIN USER
--- user1 user1Pw! USER
--- user2 user2Pw! USER
+-- admin1 adminPw! ADMIN USER
+-- admin2 adminPw! ADMIN USER
+-- user1 userPw! USER
+-- user2 userPw! USER
