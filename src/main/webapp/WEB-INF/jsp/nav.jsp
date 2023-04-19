@@ -22,7 +22,7 @@
                 </security:authorize>
                 <security:authorize access="isAuthenticated()">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Account Details ℹ️</a>
+                        <a class="nav-link" href="#">My Profile ℹ️</a>
                     </li>
                 </security:authorize>
                 <security:authorize access="hasRole('ADMIN')">
@@ -48,6 +48,7 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </c:if>
+        &nbsp;
         <c:if test="${empty pageContext.request.userPrincipal}">
             <a href="<c:url value="/login"/>" class="btn btn-primary">Log in</a>
         </c:if>
