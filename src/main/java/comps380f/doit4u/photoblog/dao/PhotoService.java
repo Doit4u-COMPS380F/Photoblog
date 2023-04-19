@@ -122,4 +122,14 @@ public class PhotoService {
         }
         pRepo.save(updatedPhoto);
     }
+
+    @Transactional
+    public List<Photo> getPhotosByUsername(String username)
+            throws PhotoNotFound {
+        List<Photo> photo = pRepo.findByUsername(username);
+        if (photo == null) {
+            throw new PhotoNotFound(username);
+        }
+        return photo;
+    }
 }

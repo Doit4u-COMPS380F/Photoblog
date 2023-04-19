@@ -19,7 +19,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers("/user").hasRole("ADMIN")
-//                              .requestMatchers("/user/**").permitAll() #when no user in db
+//                                .requestMatchers("/user/**").permitAll() // when no user in db
                                 .requestMatchers("/photo/delete/**").hasRole("ADMIN")
                                 .requestMatchers("/create/**").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/photo/**").hasAnyRole("USER", "ADMIN")
@@ -29,7 +29,7 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .failureUrl("/login?error")
+                        .failureUrl("/preview?error")
                         .permitAll()
                 )
                 .logout(logout -> logout

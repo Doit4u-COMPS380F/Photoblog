@@ -27,6 +27,7 @@ create table if not exists users (
     password varchar(100) not null,
     phone varchar(12),
     email varchar(100),
+    description varchar(255),
     primary key (username)
 );
 

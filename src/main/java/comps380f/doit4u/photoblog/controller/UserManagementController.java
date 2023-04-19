@@ -1,6 +1,8 @@
 package comps380f.doit4u.photoblog.controller;
 
+import comps380f.doit4u.photoblog.dao.PhotoService;
 import comps380f.doit4u.photoblog.dao.UserManagementService;
+import comps380f.doit4u.photoblog.exception.PhotoNotFound;
 import comps380f.doit4u.photoblog.validator.UserValidator;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -35,10 +37,25 @@ public class UserManagementController {
     @Resource
     UserManagementService umService;
 
+    @Resource
+    private PhotoService pService;
+
     @GetMapping({"", "/", "/index"})
     public String list(ModelMap model) {
         model.addAttribute("photoUsers", umService.getPhotoUsers());
         return "listUser";
+    }
+
+    public  static class DescriptionForm {
+        private String description;
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
     }
 
     public static class Form {
@@ -122,5 +139,25 @@ public class UserManagementController {
         umService.delete(username);
         logger.info("User " + username + " deleted.");
         return "redirect:/user";
+    }
+
+    @GetMapping("/profile/{username}")
+    public ModelAndView list(@PathVariable("username") String username) throws PhotoNotFound {
+        ModelAndView modelAndView = new ModelAndView("profile");
+        modelAndView.addObject("userProfile", umService.getPhotoUsersByUserName(username));
+        modelAndView.addObject("photoDatabase", pService.getPhotosByUsername(username));
+        DescriptionForm descriptionForm = new DescriptionForm();
+        descriptionForm.setDescription(umService.getPhotoUsersByUserName(username).getDescription());
+        modelAndView.addObject("descriptionForm", descriptionForm);
+        return modelAndView;
+    }
+
+    @PostMapping("/profile/{username}")
+    public String updateDescription(@PathVariable("username") String username, @ModelAttribute("descriptionForm") @Valid DescriptionForm descriptionForm, BindingResult result) throws PhotoNotFound {
+        if (result.hasErrors()) { return "profile"; }
+
+        umService.updateDescription(username, descriptionForm.getDescription());
+        logger.info("User " + username + " updated description.");
+        return "redirect:/user/profile/" + username + "?updated";
     }
 }
