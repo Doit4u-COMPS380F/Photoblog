@@ -50,7 +50,7 @@
     <c:forEach items="${commentDatabase}" var="comment">
     <c:choose>
     <c:when test="${comment.reference == photo.id}">
-    <div class="card">
+    <div class="card" id="comment${comment.id}">
         <div class="card-body">
             <h6>${comment.author}:</h6>
             <p>${comment.content}</p>
