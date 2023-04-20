@@ -1,5 +1,6 @@
 package comps380f.doit4u.photoblog.controller;
 
+import comps380f.doit4u.photoblog.dao.CommentService;
 import comps380f.doit4u.photoblog.dao.PhotoService;
 import comps380f.doit4u.photoblog.dao.UserManagementService;
 import comps380f.doit4u.photoblog.exception.PhotoNotFound;
@@ -39,6 +40,9 @@ public class UserManagementController {
 
     @Resource
     private PhotoService pService;
+
+    @Autowired
+    private CommentService cService;
 
     @GetMapping({"", "/", "/index"})
     public String list(ModelMap model) {
@@ -149,6 +153,7 @@ public class UserManagementController {
         DescriptionForm descriptionForm = new DescriptionForm();
         descriptionForm.setDescription(umService.getPhotoUsersByUserName(username).getDescription());
         modelAndView.addObject("descriptionForm", descriptionForm);
+        modelAndView.addObject("comments", cService.getComments());
         return modelAndView;
     }
 
