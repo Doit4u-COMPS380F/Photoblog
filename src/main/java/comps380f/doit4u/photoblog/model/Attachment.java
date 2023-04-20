@@ -23,12 +23,12 @@ public class Attachment {
     @Lob
     private byte[] contents;
 
-    @Column(name = "ticket_id", insertable=false, updatable=false)
-    private long ticketId;
+    @Column(name = "photo_id", insertable=false, updatable=false)
+    private long photoId;
 
     @ManyToOne
-    @JoinColumn(name = "ticket_id")
-    private Ticket ticket;
+    @JoinColumn(name = "photo_id")
+    private Photo photo;
 
     // getters and setters of all properties
     public UUID getId() {
@@ -63,20 +63,20 @@ public class Attachment {
         this.contents = contents;
     }
 
-    public long getTicketId() {
-        return ticketId;
+    public long getPhotoId() {
+        return photoId;
     }
 
-    public void setTicketId(long ticketId) {
-        this.ticketId = ticketId;
+    public void setPhotoId(long photoId) {
+        this.photoId = photoId;
     }
 
-    public Ticket getTicket() {
-        return ticket;
+    public Photo getPhoto() {
+        return photo;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
     }
 }
 

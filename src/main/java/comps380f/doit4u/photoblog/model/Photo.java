@@ -8,16 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Ticket {
+public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "name")
-    private String customerName;
-    private String subject;
-    private String body;
+//    @Column(name = "name")
+    private String username;
+    private String caption;
 
-    @OneToMany(mappedBy = "ticket", fetch = FetchType.EAGER,
+    @OneToMany(mappedBy = "photo", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     private List<Attachment> attachments = new ArrayList<>();
@@ -31,28 +30,14 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getCustomerName() {
-        return customerName;
-    }
+    public String getUsername() { return username; }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
+    public void setUsername(String username) { this.username = username; }
 
-    public String getSubject() {
-        return subject;
-    }
+    public String getCaption() { return caption; }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setCaption(String caption) {
+        this.caption = caption;
     }
 
     public List<Attachment> getAttachments() {
@@ -64,7 +49,7 @@ public class Ticket {
     }
 
     public void deleteAttachment(Attachment attachment) {
-        attachment.setTicket(null);
+        attachment.setPhoto(null);
         this.attachments.remove(attachment);
     }
 }

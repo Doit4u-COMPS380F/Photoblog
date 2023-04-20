@@ -1,13 +1,17 @@
 package comps380f.doit4u.photoblog.controller;
 
-
 import comps380f.doit4u.photoblog.dao.UserManagementService;
 import comps380f.doit4u.photoblog.validator.UserValidator;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,29 +24,36 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/user")
 public class UserManagementController {
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Autowired
     private UserValidator userValidator;
 
     @Resource
     UserManagementService umService;
 
-    @GetMapping({"", "/", "/list"})
+    @GetMapping({"", "/", "/index"})
     public String list(ModelMap model) {
-        model.addAttribute("ticketUsers", umService.getTicketUsers());
+        model.addAttribute("photoUsers", umService.getPhotoUsers());
         return "listUser";
     }
 
     public static class Form {
         @NotEmpty(message="Please enter your user name.")
         private String username;
-
         @NotEmpty(message="Please enter your password.")
         @Size(min=6, max=15, message="Your password length must be between {min} and {max}.")
+        @Pattern.List({
+                @Pattern(regexp=".*[A-Z].*", message="Your password must contain at least one uppercase letter."),
+                @Pattern(regexp=".*[\\d\\W].*", message="Your password must contain at least one symbol (non-alphanumeric character).")
+        })
         private String password;
         private String confirm_password;
-
+        private String phone;
+        private String email;
         @NotEmpty(message="Please select at least one role.")
         private String[] roles;
 
@@ -55,21 +66,23 @@ public class UserManagementController {
             this.username = username;
         }
 
-        public String getPassword() {
-            return password;
-        }
+        public String getPassword() { return password; }
 
         public void setPassword(String password) {
             this.password = password;
         }
 
-        public String getConfirm_password() {
-            return confirm_password;
-        }
+        public String getConfirm_password() { return confirm_password; }
 
-        public void setConfirm_password(String confirm_password) {
-            this.confirm_password = confirm_password;
-        }
+        public void setConfirm_password(String confirm_password) { this.confirm_password = confirm_password; }
+
+        public String getPhone() { return phone; }
+
+        public void setPhone(String phone) { this.phone = phone; }
+
+        public String getEmail() { return email; }
+
+        public void setEmail(String email) { this.email = email; }
 
         public String[] getRoles() {
             return roles;
@@ -82,25 +95,32 @@ public class UserManagementController {
 
     @GetMapping("/create")
     public ModelAndView create() {
-        return new ModelAndView("addUser", "ticketUser", new Form());
+        return new ModelAndView("addUser", "photoUser", new Form());
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute("ticketUser") @Valid Form form, BindingResult result)
-            throws IOException {
+    public String create(@ModelAttribute("photoUser") @Valid Form form, BindingResult result) throws IOException {
         userValidator.validate(form, result);
 
-        if (result.hasErrors()) {
-            return "addUser";
+        if (result.hasErrors()) { return "addUser"; }
+
+        umService.createPhotoUser(form.getUsername(),
+                passwordEncoder.encode(form.getPassword()), form.getPhone(), form.getEmail(), form.getRoles());
+        logger.info("User " + form.getUsername() + " created.");
+
+        // Check if the current user has ADMIN role
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
+            return "redirect:/user";
+        } else {
+            return "redirect:/index";
         }
-        umService.createTicketUser(form.getUsername(),
-                passwordEncoder.encode(form.getPassword()), form.getRoles());
-        return "redirect:/user/list";
     }
 
     @GetMapping("/delete/{username}")
-    public String deleteTicket(@PathVariable("username") String username) {
+    public String deletePhoto(@PathVariable("username") String username) {
         umService.delete(username);
-        return "redirect:/user/list";
+        logger.info("User " + username + " deleted.");
+        return "redirect:/user";
     }
 }

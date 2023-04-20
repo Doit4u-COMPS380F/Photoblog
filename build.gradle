@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+//    compileOnly 'org.apache.tomcat.embed:tomcat-embed-jasper' //for latest of IDEA replaced by below script
     implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'
@@ -32,6 +33,15 @@ dependencies {
     implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
     annotationProcessor 'org.projectlombok:lombok'
     compileOnly group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'
+
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+//    implementation 'org.springframework.session:spring-session-jdbc'
+}
+
+configurations {
+    all {
+        exclude group:'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
 
 tasks.named('test') {

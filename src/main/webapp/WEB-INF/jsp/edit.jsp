@@ -1,25 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
 <head>
-    <title>Photoblog</title>
+  <title>Edit Photo #${photo.id}</title>
+  <%@include file="header.jsp" %>
 </head>
 <body>
-<c:url var="logoutUrl" value="/logout"/>
-<form action="${logoutUrl}" method="post">
-    <input type="submit" value="Log out" />
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-</form>
-
-<h2>Edit Ticket #${ticket.id}</h2>
-<form:form method="POST" enctype="multipart/form-data" modelAttribute="ticketForm">
-    <form:label path="subject">Subject</form:label><br/>
-    <form:input type="text" path="subject" /><br/><br/>
-    <form:label path="body">Body</form:label><br/>
-    <form:textarea path="body" rows="5" cols="30" /><br/><br/>
-    <b>Add more attachments</b><br />
-    <input type="file" name="attachments" multiple="multiple"/><br/><br/>
-    <input type="submit" value="Save"/><br/><br/>
+<%@include file="nav.jsp" %>
+<div class="container mt-5">
+<h2>Edit Photo #${photo.id}</h2>
+<form:form method="POST" enctype="multipart/form-data" modelAttribute="photoForm">
+  <b>Photo upload</b><br/>
+  <input type="file" id="attachments" name="attachments" accept="image/*" multiple="multiple" onchange="previewImage(this);"><br>
+  <img id="preview" src="" alt="Image Preview" style="max-width: 200px; max-height: 200px; display: none;"><br>
+  <form:label path="caption">Caption</form:label><br/>
+  <form:textarea path="caption" rows="5" cols="30"/><br/><br/>
+  <input type="submit" value="Submit"/>
 </form:form>
-<a href="<c:url value="/ticket" />">Return to list tickets</a>
+</div>
 </body>
 </html>
+<script>
+  const photoInput = document.getElementById('attachments');
+  const previewImg = document.getElementById('preview');
+
+  photoInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.addEventListener('load', function() {
+        previewImg.setAttribute('src', reader.result);
+        previewImg.style.display = 'block'; // show the preview image
+      });
+      reader.readAsDataURL(file);
+    } else {
+      previewImg.setAttribute('src', ''); // clear the preview image
+      previewImg.style.display = 'none'; // hide the preview image
+    }
+  });
+</script>

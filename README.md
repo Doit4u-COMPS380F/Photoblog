@@ -12,8 +12,8 @@
 #### *** One single task can be shared by multiple team mates
 | Tasks | Person / People |
 | -| - |
-| Photo Upload | Eric Chan  |
-| Comment Section  |  Kevin Li |
+| Photo Upload | Kevin Li  |
+| Comment Section  |  Eric Chan |
 | User Management (Login/Logout/Register) | Rex Ng |
 | Database | ykcccccc |
 
@@ -22,20 +22,15 @@
 | Page | Link |
 | - | - |
 | Index | localhost:8080/Doit4u/Photoblog/index |
-| Comment (for Developer) | localhost:8080/Doit4u/Photoblog/comment/read-comment |
 
 ## 4. Logbook
 | Event / Issue | Date |
 | - | - |
 | Project Repository Initialized | 15 Mar 2023 |
 
-## 5. TEST ACCOUNT
-| USERNAME | PASSWORD | ROLE |
-| - | - | - |
-| {NAME} | {NAME} + pw | ROLE |
-| admin | adminpw | ROLE_USER, ROLE_ADMIN |
-| keith | keithpw | ROLE_USER, ROLE_ADMIN |
-| john | johnpw | ROLE_USER |
-| mary | marypw | ROLE_ADMIN |
-
-## 6. BUG REPORTS
+## 5. Test Users
+| Username | Passowrd | Role |
+| admin | adminPw! | ADMIN, USER |
+| keith | keithPw! | ADMIN, USER |
+| user1 | user1Pw! | USER |
+| user2 | user2Pw! | USER |
