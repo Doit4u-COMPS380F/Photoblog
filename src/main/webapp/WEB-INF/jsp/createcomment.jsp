@@ -10,7 +10,7 @@
     <h5>Create Comment</h5>
     <form:form method="post" action="/Doit4u/Photoblog/comment/create-comment" enctype="multipart/form-data"
                modelAttribute="commentForm">
-        <div class="mb-3">
+        <div class="mb-3" id="inputDiv">
             <form:input path="content" class="form-control"/>
         </div>
         <div class="mb-3">
@@ -18,5 +18,8 @@
         </div>
     </form:form>
 </div>
+<script>
+    document.getElementById("inputDiv").children[0].focus();
+</script>
 </body>
 </html>
