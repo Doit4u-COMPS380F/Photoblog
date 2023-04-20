@@ -63,6 +63,5 @@
 | Username | Passowrd | Role |
 | - | - | - |
 | admin | adminPw! | ADMIN, USER |
-| keith | keithPw! | ADMIN, USER |
-| user1 | user1Pw! | USER |
-| user2 | user2Pw! | USER |
+| user1 | userPw! | USER |
+| su | P@ssw0rd | ADMIN |
