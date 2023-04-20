@@ -15,6 +15,7 @@
         </div>
         <div class="mb-3">
             <input type="submit" value="Create" class="btn btn-primary"/>
+            <a href="javascript:history.back()" class="btn btn-secondary">Cancel</a>
         </div>
     </form:form>
 </div>
