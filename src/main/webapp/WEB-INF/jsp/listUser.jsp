@@ -29,7 +29,7 @@
                 <tbody>
                 <c:forEach items="${photoUsers}" var="user">
                     <tr>
-                        <td>${user.username}</td>
+                        <td><a href="<c:url value='/user/profile/${user.username}'/>">${user.username}</a></td>
 <%--                        <td>${fn:substringAfter(user.password, '{noop}')}</td>--%>
 <%--                        <td>${user.password}</td>--%>
                         <td>${user.phone}</td>

@@ -111,7 +111,6 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Content</th>
-            <th scope="col">Author</th>
             <th scope="col">Actions</th>
         </tr>
         </thead>
@@ -121,7 +120,6 @@
                 <tr>
                     <td>${comment.id}</td>
                     <td>${comment.content}</td>
-                    <td>${comment.author}</td>
                     <td><a href="<c:url value='/view/${comment.reference}#comment${comment.id}'/>" class="btn btn-primary btn-sm">Goto</a><a
                             href="<c:url value='/comment/delete-comment/${comment.id}'/>"
                             class="btn btn-danger btn-sm ms-3">Delete</a>
