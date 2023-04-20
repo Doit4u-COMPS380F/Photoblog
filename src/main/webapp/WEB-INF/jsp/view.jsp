@@ -50,10 +50,16 @@
     <c:forEach items="${commentDatabase}" var="comment">
     <c:choose>
     <c:when test="${comment.reference == photo.id}">
-        ${comment.author}: ${comment.content}
-    <security:authorize access="isAuthenticated() and (hasRole('ADMIN') or principal.username=='${photo.username}')">
-    <a href="<!-- TODO: -->" class="btn btn-danger btn-sm">delete comment</a>
-    </security:authorize>
+    <div class="card">
+        <div class="card-body">
+            <h6>${comment.author}:</h6>
+            <p>${comment.content}</p>
+            <security:authorize
+                    access="isAuthenticated() and (hasRole('ADMIN') or principal.username=='${photo.username}')">
+                <a href="<!-- TODO: -->" class="btn btn-danger btn-sm">delete comment</a>
+            </security:authorize>
+        </div>
+    </div>
     <br/>
     </c:when>
     </c:choose>
