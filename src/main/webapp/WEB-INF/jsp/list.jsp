@@ -50,6 +50,8 @@
         [<a href="<c:url value="/ticket/delete/${entry.id}" />">Delete</a>]
       </security:authorize>
       <br />
+      <pre>Comments:</pre>
+      <br />
     </c:forEach>
   </c:otherwise>
 </c:choose>
