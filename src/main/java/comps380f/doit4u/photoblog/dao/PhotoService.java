@@ -134,4 +134,12 @@ public class PhotoService {
         }
         return photo;
     }
+
+    @Transactional
+    public void deletePhotosByUsername(String username) throws PhotoNotFound {
+        List<Photo> deletedPhotos = pRepo.findByUsername(username);
+        if (deletedPhotos != null){
+            pRepo.deleteAll(deletedPhotos);
+        }
+    }
 }

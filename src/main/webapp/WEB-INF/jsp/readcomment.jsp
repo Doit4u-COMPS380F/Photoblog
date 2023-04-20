@@ -1,21 +1,38 @@
-<h1>Read Comments</h1>
-<table border="2" width="70%" cellpadding="2">
-    <tr>
-        <th>Id</th>
-        <th>Content</th>
-        <th>Author</th>
-        <th>Reference</th>
-        <th>Delete</th>
-    </tr>
-    <c:forEach var="comment" items="${comments}">
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+<head>
+    <title>Create User</title>
+    <%@include file="header.jsp" %>
+</head>
+<body>
+<%@include file="nav.jsp" %>
+<div class="container mt-5">
+    <h2>Read Comments</h2>
+    <table class="table">
+        <thead>
         <tr>
-            <td>${comment.id}</td>
-            <td>${comment.content}</td>
-            <td>${comment.author}</td>
-            <td>${comment.reference}</td>
-            <td><a href="/Doit4u/Photoblog/comment/delete-comment/${comment.id}">Delete</a></td>
+            <th scope="col">ID</th>
+            <th scope="col">Content</th>
+            <th scope="col">Author</th>
+            <th scope="col">Actions</th>
         </tr>
-    </c:forEach>
-</table>
-<br/>
-<a href="/Doit4u/Photoblog/comment/create-comment">Create Comment</a>
+        </thead>
+        <tbody>
+        <c:forEach var="comment" items="${comments}">
+            <tr>
+                <td>${comment.id}</td>
+                <td>${comment.content}</td>
+                <td><a href="<c:url value='/user/profile/${comment.author}'/>">${comment.author}</a></td>
+                <td><a href="<c:url value='/view/${comment.reference}#comment${comment.id}'/>" class="btn btn-primary btn-sm">Goto</a><a
+                        href="<c:url value='/comment/delete-comment/${comment.id}'/>"
+                        class="btn btn-danger btn-sm ms-3">Delete</a>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    <br/><br/>
+</div>
+</body>
+</html>
+<%--<a href="/Doit4u/Photoblog/comment/create-comment">Create Comment</a>--%>

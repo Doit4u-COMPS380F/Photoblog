@@ -50,13 +50,13 @@
     <c:forEach items="${commentDatabase}" var="comment">
     <c:choose>
     <c:when test="${comment.reference == photo.id}">
-    <div class="card">
+    <div class="card" id="comment${comment.id}">
         <div class="card-body">
-            <h6>${comment.author}:</h6>
+            <h6><a href="<c:url value='/user/profile/${comment.author}'/>">${comment.author}</a>:</h6>
             <p>${comment.content}</p>
             <security:authorize
                     access="isAuthenticated() and (hasRole('ADMIN') or principal.username=='${photo.username}')">
-                <a href="<!-- TODO: -->" class="btn btn-danger btn-sm">delete comment</a>
+                <a href="<c:url value='/comment/delete-comment/${comment.id}'/>" class="btn btn-danger btn-sm">delete comment</a>
             </security:authorize>
         </div>
     </div>
@@ -64,11 +64,9 @@
     </c:when>
     </c:choose>
     </c:forEach>
-    <br/>
     <security:authorize access="isAuthenticated()">
     <a href="<c:url value='/comment/create-comment/${photoId}'/>" class="btn btn-secondary btn-sm">Comment</a>
     </security:authorize>
-    <a href="<c:url value="" />">Return to list photos</a>
     <br/><br/>
 </body>
 </html>

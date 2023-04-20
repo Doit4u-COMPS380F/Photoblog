@@ -19,19 +19,19 @@
             <table class="table">
                 <tr>
                     <th scope="col">Username</th>
-                    <th scope="col">Password</th>
+<%--                    <th scope="col">Password</th>--%>
                     <th scope="col">Phone</th>
                     <th scope="col">Email</th>
                     <th scope="col">Roles</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" colspan="2">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${photoUsers}" var="user">
                     <tr>
-                        <td>${user.username}</td>
+                        <td><a href="<c:url value='/user/profile/${user.username}'/>">${user.username}</a></td>
 <%--                        <td>${fn:substringAfter(user.password, '{noop}')}</td>--%>
-                        <td>${user.password}</td>
+<%--                        <td>${user.password}</td>--%>
                         <td>${user.phone}</td>
                         <td>${user.email}</td>
                         <td>
@@ -41,7 +41,7 @@
                             </c:forEach>
                         </td>
                         <td>
-                            <a href="<c:url value="/user/edit/${user.username}" />" class="btn btn-danger">Edit</a>
+                            <a href="<c:url value="/user/edit/${user.username}" />" class="btn btn-info">Edit</a>
                         </td>
                         <td>
                             <a href="<c:url value="/user/delete/${user.username}" />" class="btn btn-danger">Delete</a>

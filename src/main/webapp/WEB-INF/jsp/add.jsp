@@ -68,7 +68,7 @@
             previewCarousel.classList.remove("d-none"); // show the preview image
             setTimeout(function () {
                 document.getElementsByClassName('carousel-item')[0].classList.add('active'); // set the first image as active
-            }, 5); // give it a slight delay to make sure the carousel is loaded
+            }, 10); // give it a slight delay to make sure the carousel is loaded
 
             if (fileCount >= 2) {
                 prevButton.classList.remove("d-none"); // remove the d-none class to show the previous button

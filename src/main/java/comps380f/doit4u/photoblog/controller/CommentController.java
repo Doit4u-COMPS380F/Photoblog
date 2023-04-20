@@ -54,7 +54,7 @@ public class CommentController {
     @PostMapping("/create-comment")
     public View createComment(Form form, Principal principal) throws IOException {
         long commentId = commentService.createComment(principal.getName(), form.getContent(), refersToTicketId);
-        return new RedirectView("/Doit4u/Photoblog/index");
+        return new RedirectView("/Doit4u/Photoblog/success");
     }
 
     @GetMapping("/comment/{ticketId}")
@@ -68,7 +68,7 @@ public class CommentController {
     @RequestMapping(value = "/delete-comment/{id}")
     public String deleteComment(@PathVariable int id) {
         commentService.deleteById(id);
-        return "redirect:/Doit4u/Photoblog/index";
+        return "redirect:/success";
     }
 
 }
