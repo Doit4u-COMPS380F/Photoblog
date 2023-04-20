@@ -139,9 +139,7 @@ public class PhotoService {
     public void deletePhotosByUsername(String username) throws PhotoNotFound {
         List<Photo> deletedPhotos = pRepo.findByUsername(username);
         if (deletedPhotos != null){
-            for (int i = 0; i < deletedPhotos.size(); i++) {
-                pRepo.delete(deletedPhotos.get(i));
-            }
+            pRepo.deleteAll(deletedPhotos);
         }
     }
 }
