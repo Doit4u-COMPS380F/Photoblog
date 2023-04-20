@@ -41,7 +41,7 @@
                             </c:forEach>
                         </td>
                         <td>
-                            <a href="<c:url value="/user/edit//${user.username}" />" class="btn btn-info">Edit</a>
+                            <a href="<c:url value="/user/edit/${user.username}" />" class="btn btn-info">Edit</a>
                         </td>
                         <td>
                             <a href="<c:url value="/user/delete/${user.username}" />" class="btn btn-danger">Delete</a>
