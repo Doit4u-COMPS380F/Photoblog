@@ -89,6 +89,7 @@ public class TicketController {
         Ticket ticket = tService.getTicket(ticketId);
         model.addAttribute("ticketId", ticketId);
         model.addAttribute("ticket", ticket);
+        model.addAttribute("commentDatabase", commentService.getComments());
         return "view";
     }
 

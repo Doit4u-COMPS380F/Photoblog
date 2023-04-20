@@ -16,7 +16,17 @@
             <c:out value="${attachment.name}"/></a>
         [<a href="<c:url value="/ticket/${ticketId}/delete/${attachment.id}" />">Delete</a>]
     </c:forEach><br/><br/>
+    <pre>Comments:</pre>
+    <c:forEach items="${commentDatabase}" var="comment">
+        <c:choose>
+            <c:when test="${comment.reference == ticket.id}">
+                ${comment.author}: ${comment.content}
+                <br />
+            </c:when>
+        </c:choose>
+    </c:forEach>
 </c:if>
+<br />
 <a href="<c:url value="/ticket" />">Return to list tickets</a>
 </body>
 </html>
