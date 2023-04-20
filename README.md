@@ -47,10 +47,10 @@
 #### *** One single task can be shared by multiple team mates
 | Tasks | Person / People |
 | -| - |
-| Photo Upload | Kevin Li  |
-| Comment Section  |  Eric Chan |
-| User Management (Login/Logout/Register) | Rex Ng |
-| Database | ykcccccc |
+| Photo Upload | Chan Hoi Wai |
+| Comment Section  |  Li Chin Pang |
+| User Management (Login/Logout/Register/Edit/Profile Page) | Ng Kwan Yau & Chan Hoi Wai |
+| Database | Kan Cheuk Wai |
 
 ## How to Use
 #### *** Launch this project in IntelliJ IDEA and open in you browser
