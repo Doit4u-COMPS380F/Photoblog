@@ -43,7 +43,7 @@
     <ul class="list-group">
         <li class="list-group-item">Post by: <c:out value="${photo.username}"/></li>
         <li class="list-group-item">Caption: <c:out value="${photo.caption}"/></li>
-        <%-- <li class="list-group-item">Uploaded time:  ${photo.date}</li> --%>
+         <li class="list-group-item">Uploaded time:  ${photo.date}</li>
     </ul>
     <br/>
     <h5>Comments</h5>
@@ -56,6 +56,9 @@
             </c:choose>
         </c:forEach>
     <br/>
+    <security:authorize access="isAuthenticated() and (hasRole('ADMIN') or principal.username=='${photo.username}')">
+        <a href="<c:url value='/comment/create-comment/${photoId}'/>" class="btn btn-secondary">Comment</a>
+    </security:authorize>
     <a href="<c:url value="" />">Return to list photos</a>
     <br/><br/>
 </body>
