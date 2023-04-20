@@ -71,8 +71,7 @@
                                 ${entry.caption}
                         </p>
                         <p class="card-text">
-                            <small class="text-body-secondary">uploaded time:
-                                <!-- TODO: {entry.uploadedTime} --></small>
+                            <small class="text-body-secondary">uploaded time: ${entry.date}</small>
                         </p>
                         <span class="mb-1">
                             <security:authorize
