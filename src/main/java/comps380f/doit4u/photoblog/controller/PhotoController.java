@@ -1,5 +1,6 @@
 package comps380f.doit4u.photoblog.controller;
 
+import comps380f.doit4u.photoblog.dao.CommentService;
 import comps380f.doit4u.photoblog.dao.PhotoService;
 import comps380f.doit4u.photoblog.exception.AttachmentNotFound;
 import comps380f.doit4u.photoblog.exception.PhotoNotFound;
@@ -8,6 +9,7 @@ import comps380f.doit4u.photoblog.model.Photo;
 import comps380f.doit4u.photoblog.view.DownloadingView;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +33,9 @@ public class PhotoController {
 
     @Resource
     private PhotoService pService;
+
+    @Autowired
+    private CommentService commentService;
 
     // Controller methods, Form-backing object, ...
     @GetMapping(value = {"", "/index"})
@@ -88,6 +93,8 @@ public class PhotoController {
         Photo photo = pService.getPhoto(photoId);
         model.addAttribute("photoId", photoId);
         model.addAttribute("photo", photo);
+        model.addAttribute("commentDatabase", commentService.getComments());
+        System.out.println("Model Attributes = " +model);
         return "view";
     }
 
