@@ -52,7 +52,7 @@
     <c:when test="${comment.reference == photo.id}">
     <div class="card" id="comment${comment.id}">
         <div class="card-body">
-            <h6>${comment.author}:</h6>
+            <h6><a href="<c:url value='/user/profile/${comment.author}'/>">${comment.author}</a>:</h6>
             <p>${comment.content}</p>
             <security:authorize
                     access="isAuthenticated() and (hasRole('ADMIN') or principal.username=='${photo.username}')">

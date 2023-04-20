@@ -65,7 +65,7 @@
                         </div>
                         <hr/>
                         <a href="<c:url value="/view/${entry.id}" />">
-                            <h5 class="card-title">Photo ${entry.id}</h5>
+                            <h5 class="card-title">Photo ${entry.id} - <a href="<c:url value='/user/profile/${comment.author}'/>">${entry.username}</a></h5>
                         </a>
                         <p class="card-text">
                                 ${entry.caption}
