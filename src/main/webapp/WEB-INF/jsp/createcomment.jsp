@@ -1,17 +1,9 @@
 <h1>Create Comment</h1>
-<form:form method="post" action="/Doit4u/Photoblog/comment/create-comment">
+<form:form method="post" action="/Doit4u/Photoblog/comment/create-comment" enctype="multipart/form-data" modelAttribute="commentForm">
     <table>
         <tr>
             <td>Content: </td>
             <td><form:input path="content"/></td>
-        </tr>
-        <tr>
-            <td>Author: </td>
-            <td><form:input path="author"/></td>
-        </tr>
-        <tr>
-            <td>Reference: </td>
-            <td><form:input path="reference"/></td>
         </tr>
         <tr>
             <td></td>

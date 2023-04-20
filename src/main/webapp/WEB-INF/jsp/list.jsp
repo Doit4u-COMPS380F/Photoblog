@@ -40,7 +40,6 @@
       (Uploader: <c:out value="${entry.customerName}"/>)
       <!-- COMMENT -->
       [<a href="<c:url value="/comment/create-comment/${entry.id}" />">Comment</a>]
-
       <!-- EDIT -->
       <security:authorize access="hasRole('ADMIN') or
                                 principal.username=='${entry.customerName}'">

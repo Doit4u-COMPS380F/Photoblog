@@ -5,8 +5,8 @@ import comps380f.doit4u.photoblog.dao.CommentService;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
@@ -21,6 +21,7 @@ public class CommentController {
 
     @Autowired
     private CommentService commentService;
+    private String refersToTicketId;
 
     @RequestMapping("/read-comment")
     public String showReadCommentPage(Model model) {
@@ -28,49 +29,36 @@ public class CommentController {
         return "readcomment";
     }
 
-    /*
-    @GetMapping("/create-comment")
-    public ModelAndView create() {
-
-        return new ModelAndView("createcomment", "commentForm", new CommentController.Form());
+    @GetMapping("/create-comment/{ticketId}")
+    public ModelAndView createComment(@PathVariable("ticketId") long ticketId) {
+        String reference = Long.toString(ticketId);
+        System.out.println("Ready to Add Comment");
+        Form aForm = new Form();
+        refersToTicketId = Long.toString(ticketId);
+        return new ModelAndView("createcomment", "commentForm", aForm);
     }
 
     public static class Form {
         private String content;
-        public String getContent() {
-            return content;
-        }
-        public void setContent(String content) {
-            this.content = content;
-        }
+        private String reference;
+        public String getContent() { return content; }
+        public void setContent(String content) { this.content = content; }
+        public String getReference() { return reference; }
+        public void setReference(String reference) { this.reference = reference; }
 
     }
 
     @PostMapping("/create-comment")
-    public View create(TicketController.Form form, Principal principal) throws IOException {
-        long ticketId = tService.createTicket(principal.getName(),
-                form.getSubject(), form.getBody(), form.getAttachments());
-        return new RedirectView("/ticket/view/" + ticketId, true);
-    }
-    */
-
-    @RequestMapping("/create-comment/{ticketId}")
-    public String showCreateCommentPage(@PathVariable("ticketId") long ticketId, Model model, Principal principal) {
-        String userName = principal.getName();
-        String reference = Long.toString(ticketId);
-        System.out.println("User name = " +userName);
-        System.out.println("Ticket ID = " +reference);
-        System.out.println("Adding Attribute");
-        model.addAttribute("command", new Comment());
-        System.out.println("Ready to Return");
-        return "createcomment";
+    public View createComment(CommentController.Form form, Principal principal) throws IOException {
+        long commentId = commentService.createComment(principal.getName(), form.getContent(), refersToTicketId);
+        return new RedirectView("/Doit4u/Photoblog/ticket/list");
     }
 
-    @RequestMapping(value = "/create-comment", method = RequestMethod.POST)
-    public String createContact(@ModelAttribute("comment") Comment comment) {
-        System.out.println("Ready to Save Comment");
-        commentService.saveComment(comment);
-        System.out.println("A Comment is Saved");
+    @GetMapping("/comment/{ticketId}")
+    public String view(@PathVariable("ticketId") long ticketId, ModelMap model) {
+        Comment comment = commentService.getComment(ticketId);
+        model.addAttribute("ticketId", ticketId);
+        model.addAttribute("ticket", comment);
         return "redirect:/comment/read-comment";
     }
 

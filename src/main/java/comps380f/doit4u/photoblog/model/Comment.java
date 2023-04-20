@@ -24,11 +24,7 @@ public class Comment {
     @Column
     private String reference;
 
-    public void setReference(@PathVariable String ticketId) {
-        reference = ticketId;
-    }
+    public String getReference() { return reference; }
 
-    public String getReference() {
-        return reference;
-    }
+    //public void setReference() { reference = ticketId; }
 }
