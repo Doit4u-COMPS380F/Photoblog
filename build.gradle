@@ -27,8 +27,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.security:spring-security-taglibs'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    compileOnly 'org.projectlombok:lombok'
+    implementation group: 'javax.servlet', name: 'jstl', version: '1.2'
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2.1-b03'
+
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
 //    implementation 'org.springframework.session:spring-session-jdbc'
 }
 

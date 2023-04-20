@@ -1,7 +1,7 @@
--- DROP TABLE IF EXISTS photo;
 -- DROP TABLE IF EXISTS attachemnt;
--- DROP TABLE IF EXISTS user_roles;
+-- DROP TABLE IF EXISTS photo CASCADE;
 -- DROP TABLE IF EXISTS users;
+-- DROP TABLE IF EXISTS user_roles;
 -- DROP TABLE IF EXISTS spring_session;
 -- DROP TABLE IF EXISTS spring_session_attributes;
 
@@ -23,12 +23,18 @@ create table if not exists attachment (
     foreign key (photo_id) references photo
 );
 
+CREATE TABLE IF NOT EXISTS comment (
+    id int auto_increment,
+    content varchar(255) NOT NULL,
+    author varchar(255) NOT NULL,
+    reference varchar(255) NOT NULL
+    );
+
 create table if not exists users (
     username varchar(50) not null,
-    password varchar(100) not null,
+    password varchar(255) not null,
     phone varchar(12),
     email varchar(100),
-    description varchar(255),
     primary key (username)
 );
 
