@@ -77,11 +77,13 @@ public class PhotoService {
     }
 
     @Transactional
-    public long createPhoto(String username, String caption, List<MultipartFile> attachments)
+    public long createPhoto(String username, String caption, List<MultipartFile> attachments, String date)
             throws IOException {
+
         Photo photo = new Photo();
         photo.setUsername(username);
         photo.setCaption(caption);
+        photo.setDate(date);
 
         for (MultipartFile filePart : attachments) {
             Attachment attachment = new Attachment();

@@ -55,14 +55,6 @@
                 <div class="card">
                     <div class="card-body">
                         <div id="carousel-${entry.id}" class="carousel slide">
-                            <!-- Indicators -->
-                                <%--                            <ol class="carousel-indicators">--%>
-                                <%--                                <c:forEach items="${entry.attachments}" varStatus="i">--%>
-                                <%--                                    <li data-target="#carousel-${entry.id}" data-slide-to="${i.index}"--%>
-                                <%--                                        <c:if test="${i.index eq 0}">class="active"</c:if>></li>--%>
-                                <%--                                </c:forEach>--%>
-                                <%--                            </ol>--%>
-                            <!-- Slides -->
                             <div class="carousel-inner">
                                 <c:forEach items="${entry.attachments}" varStatus="i">
                                     <c:set var="attachment" value="${entry.attachments[i.index]}"/>
@@ -92,8 +84,7 @@
                                 ${entry.caption}
                         </p>
                         <p class="card-text">
-                            <small class="text-body-secondary">uploaded time:
-                                <!-- TODO: {entry.uploadedTime} --></small>
+                            <small class="text-body-secondary">uploaded time: ${entry.date}</small>
                         </p>
                         <span class="mb-1">
                             <security:authorize

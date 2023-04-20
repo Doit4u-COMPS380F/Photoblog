@@ -43,7 +43,7 @@
     <ul class="list-group">
         <li class="list-group-item">Post by: <c:out value="${photo.username}"/></li>
         <li class="list-group-item">Caption: <c:out value="${photo.caption}"/></li>
-        <li class="list-group-item">Uploaded time:  <!-- TODO: value="{photo.uploadedTime}" --></li>
+        <li class="list-group-item">Uploaded time:  ${photo.date}</li>
     </ul>
     <br/>
     <h5>Comments</h5>

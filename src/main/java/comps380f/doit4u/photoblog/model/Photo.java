@@ -15,6 +15,15 @@ public class Photo {
 //    @Column(name = "name")
     private String username;
     private String caption;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     @OneToMany(mappedBy = "photo", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)

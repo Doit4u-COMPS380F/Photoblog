@@ -18,6 +18,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,9 +46,19 @@ public class PhotoController {
 
     public static class Form {
         private String caption;
+        private String date;
+
         private List<MultipartFile> attachments;
 
         // Getters and Setters of body, attachments
+        public void setDate(String date) {
+            this.date = "date";
+        }
+
+        public String getDate() {
+            return date;
+        }
+
         public String getCaption() { return caption; }
 
         public void setCaption(String caption) { this.caption = caption; }
@@ -60,7 +74,10 @@ public class PhotoController {
 
     @PostMapping("/create")
     public View create(Form form, Principal principal) throws IOException {
-        long photoId = pService.createPhoto(principal.getName(), form.getCaption(), form.getAttachments());
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String strDate = dateFormat.format(date);
+        long photoId = pService.createPhoto(principal.getName(), form.getCaption(), form.getAttachments(),strDate);
         return new RedirectView("/view/" + photoId, true);
     }
 
