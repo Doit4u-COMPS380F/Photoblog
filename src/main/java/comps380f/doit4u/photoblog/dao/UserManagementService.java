@@ -1,7 +1,9 @@
 package comps380f.doit4u.photoblog.dao;
 
+import comps380f.doit4u.photoblog.exception.PhotoNotFound;
 import comps380f.doit4u.photoblog.model.PhotoUser;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,18 +15,22 @@ public class UserManagementService {
     @Resource
     private PhotoUserRepository puRepo;
 
+    @Resource
+    private PhotoService pService;
+
     @Transactional
     public List<PhotoUser> getPhotoUsers() {
         return puRepo.findAll();
     }
 
     @Transactional
-    public void delete(String username) {
+    public void delete(String username) throws PhotoNotFound {
         PhotoUser photoUser = puRepo.findById(username).orElse(null);
         if (photoUser == null) {
             throw new UsernameNotFoundException("User '" + username + "' not found.");
         }
         puRepo.delete(photoUser);
+        pService.deletePhotosByUsername(username);
     }
 
     @Transactional

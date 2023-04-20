@@ -139,7 +139,7 @@ public class UserManagementController {
     }
 
     @GetMapping("/delete/{username}")
-    public String deletePhoto(@PathVariable("username") String username) {
+    public String deletePhoto(@PathVariable("username") String username) throws PhotoNotFound {
         umService.delete(username);
         logger.info("User " + username + " deleted.");
         return "redirect:/user";
