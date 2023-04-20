@@ -61,6 +61,7 @@
 
 ## 5. Test Users
 | Username | Passowrd | Role |
+| - | - | - |
 | admin | adminPw! | ADMIN, USER |
 | keith | keithPw! | ADMIN, USER |
 | user1 | user1Pw! | USER |
