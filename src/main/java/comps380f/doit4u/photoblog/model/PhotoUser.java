@@ -14,13 +14,15 @@ public class PhotoUser {
     private String phone;
     private String email;
 
+    private String description;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserRole> roles = new ArrayList<>();
 
     public PhotoUser() {}
 
-    public PhotoUser(String username, String password, String phone, String email,  String[] roles) {
+    public PhotoUser(String username, String password, String phone, String email,  String[] roles, String description) {
         this.username = username;
 //        this.password = "{noop}" + password;
         this.password = password;
@@ -29,6 +31,7 @@ public class PhotoUser {
         for (String role : roles) {
             this.roles.add(new UserRole(this, role));
         }
+        this.description = description;
     }
 
     // getters and setters of all properties
@@ -70,5 +73,13 @@ public class PhotoUser {
 
     public void setRoles(List<UserRole> roles) {
         this.roles = roles;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

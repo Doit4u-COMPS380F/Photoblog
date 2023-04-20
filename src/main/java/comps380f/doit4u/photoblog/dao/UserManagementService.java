@@ -29,7 +29,22 @@ public class UserManagementService {
 
     @Transactional
     public void createPhotoUser(String username, String password, String phone, String email,  String[] roles) {
-        PhotoUser user = new PhotoUser(username, password, phone, email, roles);
+        PhotoUser user = new PhotoUser(username, password, phone, email, roles, "");
         puRepo.save(user);
+    }
+
+    @Transactional
+    public PhotoUser getPhotoUsersByUserName(String username) {
+        return puRepo.findById(username).orElse(null);
+    }
+
+    @Transactional
+    public void updateDescription(String username, String description) {
+        PhotoUser photoUser = puRepo.findById(username).orElse(null);
+        if (photoUser == null) {
+            throw new UsernameNotFoundException("User '" + username + "' not found.");
+        }
+        photoUser.setDescription(description);
+        puRepo.save(photoUser);
     }
 }

@@ -3,9 +3,6 @@
 <head>
     <title>Photoblog - Home</title>
     <%@include file="header.jsp" %>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <style>
         .card {
             margin-bottom: 20px;
@@ -36,49 +33,55 @@
             <div class="col-sm-6 mb-3 mb-sm-0">
                 <div class="card">
                     <div class="card-body">
-                        <div id="carousel-${entry.id}" class="carousel slide" data-ride="carousel">
+                        <div id="carousel-${entry.id}" class="carousel slide">
                             <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <c:forEach items="${entry.attachments}" varStatus="i">
-                                    <li data-target="#carousel-${entry.id}" data-slide-to="${i.index}"
-                                        <c:if test="${i.index eq 0}">class="active"</c:if>></li>
-                                </c:forEach>
-                            </ol>
+                                <%--                            <ol class="carousel-indicators">--%>
+                                <%--                                <c:forEach items="${entry.attachments}" varStatus="i">--%>
+                                <%--                                    <li data-target="#carousel-${entry.id}" data-slide-to="${i.index}"--%>
+                                <%--                                        <c:if test="${i.index eq 0}">class="active"</c:if>></li>--%>
+                                <%--                                </c:forEach>--%>
+                                <%--                            </ol>--%>
                             <!-- Slides -->
                             <div class="carousel-inner">
                                 <c:forEach items="${entry.attachments}" varStatus="i">
                                     <c:set var="attachment" value="${entry.attachments[i.index]}"/>
                                     <div class="carousel-item <c:if test="${i.index eq 0}">active</c:if>">
                                         <img src="<c:url value='/${entry.id}/attachment/${attachment.id}' />"
-                                             alt="<c:out value='${attachment.name}'/>" class="card-img-top" alt=""
+                                             alt="<c:out value='${attachment.name}'/>" alt=""
+                                             class="d-block card-img-top"
                                              style="max-width: 100%;">
                                     </div>
                                 </c:forEach>
                             </div>
                             <!-- Left and right controls -->
-                            <button class="carousel-control-prev <c:if test="${fn:length(entry.attachments) <= 1}">d-none</c:if>" href="#carousel-${entry.id}" data-slide="prev">
+                            <button class="carousel-control-prev <c:if test="${fn:length(entry.attachments) <= 1}">d-none</c:if>"
+                                    data-bs-target="#carousel-${entry.id}" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon"></span>
                             </button>
-                            <button class="carousel-control-next <c:if test="${fn:length(entry.attachments) <= 1}">d-none</c:if>" href="#carousel-${entry.id}" data-slide="next">
+                            <button class="carousel-control-next <c:if test="${fn:length(entry.attachments) <= 1}">d-none</c:if>"
+                                    data-bs-target="#carousel-${entry.id}" data-bs-slide="next">
                                 <span class="carousel-control-next-icon"></span>
                             </button>
                         </div>
-
+                        <hr/>
                         <a href="<c:url value="/view/${entry.id}" />">
                             <h5 class="card-title">Photo ${entry.id}</h5>
                         </a>
                         <p class="card-text">
                                 ${entry.caption}
                         </p>
-                        <security:authorize access="isAuthenticated() and (hasRole('ADMIN') or principal.username=='${entry.username}')">
-                            <a href="<c:url value='/comment/create-comment/${entry.id}'/>" class="btn btn-secondary">Comment</a>
-                        </security:authorize>
-                        <security:authorize access="isAuthenticated() and (hasRole('ADMIN') or principal.username=='${entry.username}')">
-                            <a href="<c:url value='/edit/${entry.id}'/>" class="btn btn-secondary">Edit</a>
-                        </security:authorize>
-                        <security:authorize access="isAuthenticated() and hasRole('ADMIN')">
-                            <a href="<c:url value='/delete/${entry.id}'/>" class="btn btn-danger">Delete</a>
-                        </security:authorize>
+                        <p class="card-text">
+                            <small class="text-body-secondary">uploaded time: ${entry.date}</small>
+                        </p>
+                        <span class="mb-1">
+                            <security:authorize
+                                    access="isAuthenticated() and (hasRole('ADMIN') or principal.username=='${entry.username}')">
+                                <a href="<c:url value='/edit/${entry.id}'/>" class="btn btn-secondary btn-sm">Edit</a>
+                            </security:authorize>
+                            <security:authorize access="isAuthenticated() and hasRole('ADMIN')">
+                                <a href="<c:url value='/delete/${entry.id}'/>" class="btn btn-danger btn-sm ms-1">Delete</a>
+                            </security:authorize>
+                        </span>
                     </div>
                 </div>
             </div>

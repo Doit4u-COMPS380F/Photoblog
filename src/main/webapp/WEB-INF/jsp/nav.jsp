@@ -15,14 +15,16 @@
                         <a class="nav-link" href="/Doit4u/Photoblog/create">Upload ⬆️</a>
                     </li>
                 </security:authorize>
+<%--                <security:authorize access="isAuthenticated()">--%>
+<%--                    <li class="nav-item">--%>
+<%--                        <a class="nav-link" href="#">My Gallery 🖼️</a>--%>
+<%--                    </li>--%>
+<%--                </security:authorize>--%>
                 <security:authorize access="isAuthenticated()">
                     <li class="nav-item">
-                    <a class="nav-link" href="#">My Gallery 🖼️</a>
-                </li>
-                </security:authorize>
-                <security:authorize access="isAuthenticated()">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">My Account Details ℹ️</a>
+                        <a class="nav-link" href="<c:url value="/user/profile/${
+                            pageContext.request.userPrincipal.name
+                        }" />">My Profile ℹ️</a>
                     </li>
                 </security:authorize>
                 <security:authorize access="hasRole('ADMIN')">
@@ -35,21 +37,29 @@
                 <%--                </li>--%>
             </ul>
         </div>
-        <c:if test="${empty pageContext.request.userPrincipal}">
-            <a href="<c:url value="/user/create"/>" class="btn btn-info">Register</a>
-        </c:if>
+        <c:choose>
+            <c:when test="${empty pageContext.request.userPrincipal}">
+                <form class="d-flex">
+                    <a href="<c:url value="/user/create"/>" class="btn btn-info me-2">Register</a>
+                    &nbsp;
+                    <a href="<c:url value="/login"/>" class="btn btn-primary">Log in</a>
+                </form>
+            </c:when>
+            <c:otherwise>
+                <security:authorize access="isAuthenticated()">
+                <span class="navbar-text me-2">
+                    Welcome, <security:authentication property="principal.username"/>
+                </span>
+                </security:authorize>
+                <c:url var="logoutUrl" value="/logout"/>
+                <form action="${logoutUrl}" method="post" class="d-flex">
+                    <input type="submit" value="Log out" class="btn btn-outline-danger"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+            </c:otherwise>
+        </c:choose>
         <c:if test="${not empty pageContext.request.userPrincipal}">
-            <security:authorize access="isAuthenticated()">
-                <p>Welcome, <security:authentication property="principal.username" /></p>
-            </security:authorize>
-            <c:url var="logoutUrl" value="/logout"/>
-            <form action="${logoutUrl}" method="post" class="d-flex">
-                <input type="submit" value="Log out" class="btn btn-outline-danger"/>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
-        </c:if>
-        <c:if test="${empty pageContext.request.userPrincipal}">
-            <a href="<c:url value="/login"/>" class="btn btn-primary">Log in</a>
+
         </c:if>
     </div>
 </nav>
