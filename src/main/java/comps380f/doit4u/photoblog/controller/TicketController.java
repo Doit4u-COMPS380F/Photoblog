@@ -1,6 +1,7 @@
 package comps380f.doit4u.photoblog.controller;
 
 import comps380f.doit4u.photoblog.dao.TicketService;
+import comps380f.doit4u.photoblog.dao.CommentService;
 import comps380f.doit4u.photoblog.exception.AttachmentNotFound;
 import comps380f.doit4u.photoblog.exception.TicketNotFound;
 import comps380f.doit4u.photoblog.model.Attachment;
@@ -8,6 +9,7 @@ import comps380f.doit4u.photoblog.model.Ticket;
 import comps380f.doit4u.photoblog.view.DownloadingView;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +29,15 @@ public class TicketController {
 
     @Resource
     private TicketService tService;
+    @Autowired
+    private CommentService commentService;
 
     // Controller methods, Form-backing object, ...
     @GetMapping(value = {"", "/list"})
     public String list(ModelMap model) {
         model.addAttribute("ticketDatabase", tService.getTickets());
+        model.addAttribute("commentDatabase", commentService.getComments());
+        System.out.println("Model Attributes = " +model);
         return "list";
     }
 

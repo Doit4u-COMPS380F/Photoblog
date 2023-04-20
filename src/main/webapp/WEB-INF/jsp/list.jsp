@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +52,15 @@
       </security:authorize>
       <br />
       <pre>Comments:</pre>
+        <c:forEach items="${commentDatabase}" var="comment">
+          <c:choose>
+            <c:when test="${comment.reference == entry.id}">
+              ${comment.author}: ${comment.content}
+              <br />
+            </c:when>
+          </c:choose>
+        </c:forEach>
+
       <br />
     </c:forEach>
   </c:otherwise>

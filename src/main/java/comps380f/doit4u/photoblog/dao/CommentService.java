@@ -19,7 +19,7 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    public List<Comment> findAll() {
+    public List<Comment> getComments() {
         return commentRepository.findAll();
     }
 

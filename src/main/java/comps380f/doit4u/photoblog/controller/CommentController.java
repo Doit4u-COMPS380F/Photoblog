@@ -25,7 +25,8 @@ public class CommentController {
 
     @RequestMapping("/read-comment")
     public String showReadCommentPage(Model model) {
-        model.addAttribute("comments", commentService.findAll());
+        model.addAttribute("comments", commentService.getComments());
+        System.out.println("Model Attributes = " +model);
         return "readcomment";
     }
 
