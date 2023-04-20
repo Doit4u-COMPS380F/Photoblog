@@ -24,7 +24,8 @@
                 <td>${comment.content}</td>
                 <td>${comment.author}</td>
                 <td><a href="<c:url value='/view/${comment.reference}'/>" class="btn btn-primary btn-sm">Goto</a><a
-                        href="/Doit4u/Photoblog/comment/delete-comment/${comment.id}" class="btn btn-danger btn-sm ms-3">Delete</a>
+                        href="<c:url value='/comment/delete-comment/${comment.id}'/>"
+                        class="btn btn-danger btn-sm ms-3">Delete</a>
                 </td>
             </tr>
         </c:forEach>

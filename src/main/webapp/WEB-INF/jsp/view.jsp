@@ -56,7 +56,7 @@
             <p>${comment.content}</p>
             <security:authorize
                     access="isAuthenticated() and (hasRole('ADMIN') or principal.username=='${photo.username}')">
-                <a href="<!-- TODO: -->" class="btn btn-danger btn-sm">delete comment</a>
+                <a href="<c:url value='/comment/delete-comment/${comment.id}'/>" class="btn btn-danger btn-sm">delete comment</a>
             </security:authorize>
         </div>
     </div>
