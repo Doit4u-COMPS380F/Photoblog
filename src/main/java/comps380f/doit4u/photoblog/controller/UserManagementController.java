@@ -3,8 +3,12 @@ package comps380f.doit4u.photoblog.controller;
 import comps380f.doit4u.photoblog.dao.PhotoService;
 import comps380f.doit4u.photoblog.dao.UserManagementService;
 import comps380f.doit4u.photoblog.exception.PhotoNotFound;
+import comps380f.doit4u.photoblog.exception.UserNotFound;
+import comps380f.doit4u.photoblog.model.Photo;
+import comps380f.doit4u.photoblog.model.PhotoUser;
 import comps380f.doit4u.photoblog.validator.UserValidator;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
@@ -20,8 +24,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/user")
@@ -132,6 +138,43 @@ public class UserManagementController {
         } else {
             return "redirect:/index";
         }
+    }
+
+    @GetMapping("/edit/{username}")
+    public ModelAndView showEdit(@PathVariable("username") String username,
+                                 Principal principal, HttpServletRequest request)
+            throws UserNotFound {
+        PhotoUser user = umService.getPhotoUsersByUserName(username);
+        if (user == null
+                || (!request.isUserInRole("ROLE_ADMIN")
+                && !principal.getName().equals(user.getUsername()))) {
+            return new ModelAndView(new RedirectView("/user", true));
+        }
+        ModelAndView modelAndView = new ModelAndView("editUser");
+        modelAndView.addObject("user", user);
+        Form userForm = new Form();
+//        userForm.setPassword(user.getPassword().substring(6));
+//        userForm.setConfirm_password(user.getPassword().substring(6));
+        userForm.setPhone(user.getPhone());
+        userForm.setEmail(user.getEmail());
+        userForm.setRoles(user.getRole());
+        modelAndView.addObject("userForm", userForm);
+        return modelAndView;
+    }
+
+    @PostMapping("/edit/{username}")
+    public String editPhotoUser(@PathVariable("username") String username, Form form,
+                                Principal principal, HttpServletRequest request)
+            throws IOException, UserNotFound {
+        PhotoUser photoUser = umService.getPhotoUsersByUserName(username);
+        if (photoUser == null
+                || (!request.isUserInRole("ROLE_ADMIN")
+                && !principal.getName().equals(photoUser.getUsername()))) {
+            return "redirect:/user";
+        }
+        umService.updatePhotoUser(username, passwordEncoder.encode(form.getPassword()), form.getPhone(),
+                form.getEmail(), form.getRoles());
+        return "redirect:/user";
     }
 
     @GetMapping("/delete/{username}")
