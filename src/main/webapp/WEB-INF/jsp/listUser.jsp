@@ -19,11 +19,11 @@
             <table class="table">
                 <tr>
                     <th scope="col">Username</th>
-                    <th scope="col">Password</th>
+<%--                    <th scope="col">Password</th>--%>
                     <th scope="col">Phone</th>
                     <th scope="col">Email</th>
                     <th scope="col">Roles</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" colspan="2">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                     <tr>
                         <td>${user.username}</td>
 <%--                        <td>${fn:substringAfter(user.password, '{noop}')}</td>--%>
-                        <td>${user.password}</td>
+<%--                        <td>${user.password}</td>--%>
                         <td>${user.phone}</td>
                         <td>${user.email}</td>
                         <td>
